@@ -1,0 +1,1925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avalon Pilot Service - Genshin Impact Services</title>
+    <style>
+        /* ==================== 
+           ROOT & VARIABLES
+           ==================== */
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #a78bfa;
+            --accent-color: #ec4899;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+            --card-bg: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --border-color: #334155;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            
+            --transition: all 0.3s ease;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        /* ==================== 
+           GLOBAL STYLES
+           ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #f1f5f9;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* ==================== 
+           NAVIGATION
+           ==================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #334155;
+            padding: 1rem 0;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            color: #ec4899;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+        }
+
+        .logo-text {
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #f1f5f9;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: #ec4899;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ec4899;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #f1f5f9;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        /* ==================== 
+           SECTIONS
+           ==================== */
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        /* ==================== 
+           HERO SECTION
+           ==================== */
+        .hero {
+            margin-top: 80px;
+            padding: 4rem 2rem;
+            display: flex;
+            align-items: center;
+            min-height: calc(100vh - 80px);
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.3rem;
+            color: #a78bfa;
+            margin-bottom: 1rem;
+        }
+
+        .hero-text .description {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-image {
+            position: relative;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .floating-card {
+            position: absolute;
+            background: linear-gradient(135deg, #6366f1, #a78bfa);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            font-weight: bold;
+            animation: float 3s ease-in-out infinite;
+            color: white;
+        }
+
+        .card-2 {
+            background: linear-gradient(135deg, #ec4899, #a78bfa);
+            animation: float 3s ease-in-out infinite 0.5s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* ==================== 
+           BUTTONS
+           ==================== */
+        .btn {
+            display: inline-block;
+            padding: 0.875rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #6366f1;
+            color: #6366f1;
+        }
+
+        .btn-secondary:hover {
+            background: #6366f1;
+            color: white;
+        }
+
+        .btn-service {
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .btn-lg {
+            padding: 1.25rem 3rem;
+            font-size: 1.1rem;
+        }
+
+        /* ==================== 
+           FEATURES SECTION
+           ==================== */
+        .features {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: #1e293b;
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid #334155;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: #6366f1;
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #f1f5f9;
+        }
+
+        .feature-card p {
+            color: #cbd5e1;
+        }
+
+        /* ==================== 
+           CTA SECTION
+           ==================== */
+        .cta-section {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
+            border-top: 1px solid #334155;
+            border-bottom: 1px solid #334155;
+            margin: 4rem 0;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #f1f5f9;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+            margin-bottom: 2rem;
+        }
+
+        /* ==================== 
+           PRICING SECTION
+           ==================== */
+        .pricing-header {
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+            margin-top: 80px;
+        }
+
+        .pricing-header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .pricing-header p {
+            color: #cbd5e1;
+            font-size: 1.1rem;
+        }
+
+        .pricing-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+
+        .category-header {
+            margin: 3rem 0 2rem 0;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #6366f1;
+        }
+
+        .category-header h2 {
+            font-size: 2rem;
+            color: #6366f1;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .service-card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: #6366f1;
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.2);
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #f1f5f9;
+        }
+
+        .service-card .price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ec4899;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-card .description {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .note-section {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem 4rem;
+        }
+
+        .note-box {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.1), rgba(99, 102, 241, 0.1));
+            border: 2px solid #ec4899;
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .note-box h3 {
+            margin-bottom: 1rem;
+            color: #ec4899;
+        }
+
+        .note-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .note-box li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .note-box li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        /* ==================== 
+           REVIEWS SECTION
+           ==================== */
+        .reviews-header {
+            text-align: center;
+            padding: 4rem 2rem 3rem;
+            margin-top: 80px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
+            border-bottom: 2px solid #6366f1;
+        }
+
+        .reviews-header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cute-decoration {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .star-icon {
+            font-size: 2rem;
+            animation: twinkle 1.5s ease-in-out infinite;
+        }
+
+        .star-icon:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        .star-icon:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .add-review-section {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem 4rem;
+        }
+
+        .add-review-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .review-form-wrapper {
+            background: #1e293b;
+            border: 2px solid #334155;
+            border-radius: 20px;
+            padding: 3rem;
+            transition: all 0.3s ease;
+        }
+
+        .review-form-wrapper:hover {
+            border-color: #6366f1;
+            box-shadow: 0 20px 50px rgba(99, 102, 241, 0.2);
+        }
+
+        .form-header {
+            margin-bottom: 2rem;
+            text-align: center;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid #334155;
+        }
+
+        .form-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: #f1f5f9;
+        }
+
+        .form-header p {
+            color: #cbd5e1;
+        }
+
+        .review-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            color: #f1f5f9;
+        }
+
+        .label-icon {
+            font-size: 1.3rem;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group textarea,
+        .form-group select {
+            padding: 1rem;
+            border: 2px solid #334155;
+            border-radius: 12px;
+            background: rgba(15, 23, 42, 0.5);
+            color: #f1f5f9;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group input[type="email"]:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #6366f1;
+            background: rgba(15, 23, 42, 0.8);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .rating-selector {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .rating-selector input[type="radio"] {
+            display: none;
+        }
+
+        .star-label {
+            padding: 0.75rem 1rem;
+            border: 2px solid #334155;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .star-label:hover {
+            border-color: #ec4899;
+            background: rgba(236, 72, 153, 0.15);
+            transform: scale(1.05);
+        }
+
+        .rating-selector input[type="radio"]:checked + .star-label {
+            border-color: #ec4899;
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.3), rgba(99, 102, 241, 0.3));
+            box-shadow: 0 0 15px rgba(236, 72, 153, 0.3);
+        }
+
+        .btn-submit {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+            padding: 1rem 2rem;
+        }
+
+        .btn-icon {
+            font-size: 1.3rem;
+        }
+
+        .success-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1e293b;
+            border: 2px solid #10b981;
+            border-radius: 20px;
+            padding: 3rem;
+            z-index: 2000;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            animation: slideIn 0.3s ease;
+            display: none;
+        }
+
+        .success-content {
+            text-align: center;
+            max-width: 400px;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: bounce 0.6s ease;
+        }
+
+        .success-message h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: #10b981;
+        }
+
+        .success-message p {
+            color: #cbd5e1;
+            margin-bottom: 2rem;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -60%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        .review-note {
+            text-align: center;
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #334155;
+        }
+
+        .review-illustration {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .cute-box {
+            background: linear-gradient(135deg, #6366f1, #a78bfa);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            animation: float 3s ease-in-out infinite;
+            color: white;
+        }
+
+        .cute-box-2 {
+            background: linear-gradient(135deg, #ec4899, #6366f1);
+            animation-delay: 0.5s;
+        }
+
+        .box-emoji {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .box-content p {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .review-info-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem 4rem;
+        }
+
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .info-card {
+            background: #1e293b;
+            border: 2px solid #334155;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            border-color: #6366f1;
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+        }
+
+        .info-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .info-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+            color: #f1f5f9;
+        }
+
+        .info-card p {
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        /* ==================== 
+           STATUS SECTION
+           ==================== */
+        .status-header {
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+            margin-top: 80px;
+        }
+
+        .status-header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .status-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 2rem;
+        }
+
+        .lookup-box,
+        .orders-box {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 15px;
+            padding: 2.5rem;
+        }
+
+        .lookup-box h2,
+        .orders-box h2 {
+            margin-bottom: 1rem;
+            color: #f1f5f9;
+        }
+
+        .lookup-box > p,
+        .orders-box > p {
+            color: #cbd5e1;
+            margin-bottom: 2rem;
+        }
+
+        .status-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .search-result {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid #10b981;
+            border-radius: 8px;
+            color: #10b981;
+            text-align: center;
+            display: none;
+        }
+
+        .order-example {
+            background: #0f172a;
+            border: 2px solid #6366f1;
+            padding: 1.5rem;
+            border-radius: 10px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #6366f1;
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .live-status-section {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
+            border-radius: 15px;
+            margin-bottom: 4rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .live-status-section h2 {
+            margin-bottom: 0.5rem;
+            color: #f1f5f9;
+        }
+
+        .status-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .status-card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .status-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .status-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .status-card h3 {
+            margin-bottom: 0.5rem;
+            color: #f1f5f9;
+        }
+
+        .status-card p {
+            color: #cbd5e1;
+        }
+
+        .contact-status-section {
+            text-align: center;
+            padding: 3rem 2rem;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+        }
+
+        .contact-status-section h2 {
+            margin-bottom: 1rem;
+            color: #f1f5f9;
+        }
+
+        .contact-status-section p {
+            color: #cbd5e1;
+            margin-bottom: 2rem;
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ==================== 
+           FAQ SECTION
+           ==================== */
+        .faq-section {
+            max-width: 1000px;
+            margin: 4rem auto;
+            padding: 0 2rem 4rem;
+        }
+
+        .faq-section h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .faq-item {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: #6366f1;
+        }
+
+        .faq-item h3 {
+            margin: 0;
+            color: #f1f5f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-item h3::after {
+            content: "▼";
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active h3::after {
+            transform: rotate(180deg);
+        }
+
+        .faq-item p {
+            display: none;
+            margin-top: 1rem;
+            color: #cbd5e1;
+        }
+
+        .faq-item.active p {
+            display: block;
+        }
+
+        /* ==================== 
+           TERMS SECTION
+           ==================== */
+        .terms-header {
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+            margin-top: 80px;
+        }
+
+        .terms-header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .terms-section {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .terms-content {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 15px;
+            padding: 3rem;
+        }
+
+        .terms-content h2 {
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem 0;
+            color: #6366f1;
+        }
+
+        .terms-content p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            color: #cbd5e1;
+        }
+
+        .terms-content ul {
+            margin: 1rem 0 1rem 2rem;
+        }
+
+        .terms-content li {
+            margin-bottom: 0.5rem;
+            color: #cbd5e1;
+        }
+
+        .terms-content hr {
+            border: none;
+            border-top: 1px solid #334155;
+            margin: 2rem 0;
+        }
+
+        .terms-footer {
+            text-align: center;
+            font-weight: 600;
+            color: #6366f1;
+            margin-top: 2rem;
+        }
+
+        /* ==================== 
+           FOOTER
+           ==================== */
+        .footer {
+            background: rgba(15, 23, 42, 0.95);
+            border-top: 1px solid #334155;
+            padding: 3rem 2rem 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #6366f1;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .footer-section a:hover {
+            color: #ec4899;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #334155;
+            color: #cbd5e1;
+        }
+
+        /* ==================== 
+           RESPONSIVE DESIGN
+           ==================== */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background: rgba(15, 23, 42, 0.98);
+                gap: 0;
+                padding: 2rem 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                padding: 1rem 2rem;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(10px, 10px);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -7px);
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .status-container,
+            .add-review-container {
+                grid-template-columns: 1fr;
+            }
+
+            .service-card,
+            .feature-card,
+            .faq-item {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .features h2,
+            .reviews-header h1,
+            .status-header h1,
+            .pricing-header h1 {
+                font-size: 2rem;
+            }
+
+            .services-grid,
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .rating-selector {
+                gap: 0.25rem;
+            }
+
+            .star-label {
+                padding: 0.5rem 0.6rem;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">⚓</span>
+                <span class="logo-text">Avalon Pilot</span>
+            </div>
+            <ul class="nav-links">
+                <li><a onclick="showSection('home')">Home</a></li>
+                <li><a onclick="showSection('pricing')">Services & Pricing</a></li>
+                <li><a onclick="showSection('reviews')">Reviews</a></li>
+                <li><a onclick="showSection('status')">Order Status</a></li>
+                <li><a onclick="showSection('terms')">Terms</a></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HOME SECTION -->
+    <section id="home" class="section active">
+        <!-- Hero Section -->
+        <div class="hero">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Welcome to Avalon Pilot Service</h1>
+                    <p class="subtitle">Your trusted Genshin Impact assistance hub</p>
+                    <p class="description">Struggling with exploration, domains, or character ascension? Let our experienced pilots help you sail smoothly through Teyvat!</p>
+                    <div class="hero-buttons">
+                        <a class="btn btn-primary" onclick="showSection('pricing')">View Our Services</a>
+                        <a class="btn btn-secondary" onclick="scrollToFeatures()">Learn More</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="floating-card">✨ Professional Service ✨</div>
+                    <div class="floating-card card-2">🌟 Quick & Reliable 🌟</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <section class="features">
+            <h2>Why Choose Avalon?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Professional Service</h3>
+                    <p>Expert pilots with extensive game knowledge</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Fast & Efficient</h3>
+                    <p>Quick completion times without compromising quality</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💎</div>
+                    <h3>Affordable Pricing</h3>
+                    <p>Competitive rates for premium services</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Secure & Safe</h3>
+                    <p>Your account safety is our top priority</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>Direct Communication</h3>
+                    <p>Connect with us on Discord for updates</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⭐</div>
+                    <h3>Trusted By Many</h3>
+                    <p>See what our satisfied customers say</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <h2>Ready to Get Started?</h2>
+            <p>Browse our services and choose what you need</p>
+            <a class="btn btn-primary btn-lg" onclick="showSection('pricing')">Check Pricing</a>
+        </section>
+    </section>
+
+    <!-- PRICING SECTION -->
+    <section id="pricing" class="section">
+        <div class="pricing-header">
+            <h1>Services & Pricing</h1>
+            <p>Choose the service that fits your needs</p>
+        </div>
+
+        <div class="pricing-section">
+            <!-- Exploration -->
+            <div class="category-header">
+                <h2>🗺️ Exploration Services</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card"><h3>Monstad</h3><p class="price">$8</p><p class="description">Complete Monstad exploration assistance</p><button class="btn btn-primary btn-service" onclick="redirectService('Monstad - $8')">Get Started</button></div>
+                <div class="service-card"><h3>DragonSpine</h3><p class="price">$5</p><p class="description">DragonSpine region exploration</p><button class="btn btn-primary btn-service" onclick="redirectService('DragonSpine - $5')">Get Started</button></div>
+                <div class="service-card"><h3>Liyue</h3><p class="price">$10</p><p class="description">Full Liyue exploration package</p><button class="btn btn-primary btn-service" onclick="redirectService('Liyue - $10')">Get Started</button></div>
+                <div class="service-card"><h3>Chenyue Val</h3><p class="price">$5</p><p class="description">Chenyue Valley exploration</p><button class="btn btn-primary btn-service" onclick="redirectService('Chenyue Val - $5')">Get Started</button></div>
+                <div class="service-card"><h3>Chasm</h3><p class="price">$15</p><p class="description">The Chasm complete exploration</p><button class="btn btn-primary btn-service" onclick="redirectService('Chasm - $15')">Get Started</button></div>
+                <div class="service-card"><h3>Inazuma</h3><p class="price">$5</p><p class="description">Inazuma region exploration</p><button class="btn btn-primary btn-service" onclick="redirectService('Inazuma - $5')">Get Started</button></div>
+                <div class="service-card"><h3>Enkanomiya</h3><p class="price">$5</p><p class="description">Enkanomiya exploration assistance</p><button class="btn btn-primary btn-service" onclick="redirectService('Enkanomiya - $5')">Get Started</button></div>
+                <div class="service-card"><h3>Summerforest</h3><p class="price">$30</p><p class="description">Summerforest complete package</p><button class="btn btn-primary btn-service" onclick="redirectService('Summerforest - $30')">Get Started</button></div>
+                <div class="service-card"><h3>Summerdesert</h3><p class="price">$20</p><p class="description">Summerdesert exploration</p><button class="btn btn-primary btn-service" onclick="redirectService('Summerdesert - $20')">Get Started</button></div>
+                <div class="service-card"><h3>Hadrammahaveth</h3><p class="price">$10</p><p class="description">Hadrammahaveth region</p><button class="btn btn-primary btn-service" onclick="redirectService('Hadrammahaveth - $10')">Get Started</button></div>
+                <div class="service-card"><h3>Fontain</h3><p class="price">$30</p><p class="description">Fontaine full exploration</p><button class="btn btn-primary btn-service" onclick="redirectService('Fontain - $30')">Get Started</button></div>
+                <div class="service-card"><h3>Sea of Bygone Eras</h3><p class="price">$10</p><p class="description">Sea of Bygone Eras exploration</p><button class="btn btn-primary btn-service" onclick="redirectService('Sea of Bygone Eras - $10')">Get Started</button></div>
+                <div class="service-card"><h3>Natlan</h3><p class="price">$40</p><p class="description">Natlan complete exploration</p><button class="btn btn-primary btn-service" onclick="redirectService('Natlan - $40')">Get Started</button></div>
+            </div>
+
+            <!-- Oculi Collection -->
+            <div class="category-header">
+                <h2>👁️ Oculi Collection</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card"><h3>Anemoculus</h3><p class="price">$3</p><p class="description">Anemoculus collection service</p><button class="btn btn-primary btn-service" onclick="redirectService('Anemoculus - $3')">Get Started</button></div>
+                <div class="service-card"><h3>Frostbearing Tree</h3><p class="price">$5</p><p class="description">Frostbearing Tree upgrade</p><button class="btn btn-primary btn-service" onclick="redirectService('Frostbearing Tree - $5')">Get Started</button></div>
+                <div class="service-card"><h3>Geoculus</h3><p class="price">$7</p><p class="description">Geoculus collection</p><button class="btn btn-primary btn-service" onclick="redirectService('Geoculus - $7')">Get Started</button></div>
+                <div class="service-card"><h3>Lumensstone</h3><p class="price">$10</p><p class="description">Lumensstone collection</p><button class="btn btn-primary btn-service" onclick="redirectService('Lumensstone - $10')">Get Started</button></div>
+                <div class="service-card"><h3>Rainjade Oblation</h3><p class="price">$10</p><p class="description">Rainjade Oblation service</p><button class="btn btn-primary btn-service" onclick="redirectService('Rainjade Oblation - $10')">Get Started</button></div>
+                <div class="service-card"><h3>Electroculus</h3><p class="price">$10</p><p class="description">Electroculus collection</p><button class="btn btn-primary btn-service" onclick="redirectService('Electroculus - $10')">Get Started</button></div>
+                <div class="service-card"><h3>Dendroculus</h3><p class="price">$20</p><p class="description">Dendroculus collection</p><button class="btn btn-primary btn-service" onclick="redirectService('Dendroculus - $20')">Get Started</button></div>
+                <div class="service-card"><h3>Hydroculus</h3><p class="price">$15</p><p class="description">Hydroculus collection</p><button class="btn btn-primary btn-service" onclick="redirectService('Hydroculus - $15')">Get Started</button></div>
+                <div class="service-card"><h3>Pyroculus</h3><p class="price">$15</p><p class="description">Pyroculus collection</p><button class="btn btn-primary btn-service" onclick="redirectService('Pyroculus - $15')">Get Started</button></div>
+                <div class="service-card"><h3>Amrita Pool</h3><p class="price">$2</p><p class="description">Amrita Pool assistance</p><button class="btn btn-primary btn-service" onclick="redirectService('Amrita Pool - $2')">Get Started</button></div>
+            </div>
+
+            <!-- Character Ascension -->
+            <div class="category-header">
+                <h2>✨ Character Ascension</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card"><h3>Lvl 1 > 80</h3><p class="price">$5</p><p class="description">Level 1 to 80 ascension</p><button class="btn btn-primary btn-service" onclick="redirectService('Lvl 1 > 80 - $5')">Get Started</button></div>
+                <div class="service-card"><h3>Lvl 80 > 90</h3><p class="price">$3</p><p class="description">Level 80 to 90 ascension</p><button class="btn btn-primary btn-service" onclick="redirectService('Lvl 80 > 90 - $3')">Get Started</button></div>
+                <div class="service-card"><h3>Lvl 1 > 90</h3><p class="price">$8</p><p class="description">Complete level ascension</p><button class="btn btn-primary btn-service" onclick="redirectService('Lvl 1 > 90 - $8')">Get Started</button></div>
+                <div class="service-card"><h3>Ores (x50)</h3><p class="price">$1</p><p class="description">50 ore collection</p><button class="btn btn-primary btn-service" onclick="redirectService('Ores (x50) - $1')">Get Started</button></div>
+                <div class="service-card"><h3>Ascension Mats (x30)</h3><p class="price">$1</p><p class="description">30 ascension materials</p><button class="btn btn-primary btn-service" onclick="redirectService('Ascension Mats (x30) - $1')">Get Started</button></div>
+                <div class="service-card"><h3>Flowers (x30)</h3><p class="price">$1</p><p class="description">30 flower collection</p><button class="btn btn-primary btn-service" onclick="redirectService('Flowers (x30) - $1')">Get Started</button></div>
+            </div>
+
+            <!-- Miscellaneous -->
+            <div class="category-header">
+                <h2>🎁 Miscellaneous Services</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card"><h3>Teapot</h3><p class="price">$5</p><p class="description">Serenitea Pot setup</p><button class="btn btn-primary btn-service" onclick="redirectService('Teapot - $5')">Get Started</button></div>
+                <div class="service-card"><h3>Small Events</h3><p class="price">$2</p><p class="description">Small event completion</p><button class="btn btn-primary btn-service" onclick="redirectService('Small Events - $2')">Get Started</button></div>
+                <div class="service-card"><h3>Big Events</h3><p class="price">$5</p><p class="description">Large event assistance</p><button class="btn btn-primary btn-service" onclick="redirectService('Big Events - $5')">Get Started</button></div>
+                <div class="service-card"><h3>Map Events</h3><p class="price">$10</p><p class="description">Map-wide event completion</p><button class="btn btn-primary btn-service" onclick="redirectService('Map Events - $10')">Get Started</button></div>
+                <div class="service-card"><h3>TCG (per level)</h3><p class="price">$3</p><p class="description">Trading Card Game service</p><button class="btn btn-primary btn-service" onclick="redirectService('TCG - $3 per level')">Get Started</button></div>
+            </div>
+
+            <!-- Fishing -->
+            <div class="category-header">
+                <h2>🎣 Fishing Services</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card"><h3>Weapons / Refinements</h3><p class="price">$5</p><p class="description">Weapon fishing assistance</p><button class="btn btn-primary btn-service" onclick="redirectService('Weapons / Refinements - $5')">Get Started</button></div>
+                <div class="service-card"><h3>Materials</h3><p class="price">$2</p><p class="description">Material fishing collection</p><button class="btn btn-primary btn-service" onclick="redirectService('Materials - $2')">Get Started</button></div>
+                <div class="service-card"><h3>Fishing Rods</h3><p class="price">$8</p><p class="description">Fishing rod assistance</p><button class="btn btn-primary btn-service" onclick="redirectService('Fishing Rods - $8')">Get Started</button></div>
+            </div>
+
+            <!-- Quests -->
+            <div class="category-header">
+                <h2>📜 Quest Services</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card"><h3>Story Quest</h3><p class="price">$1</p><p class="description">Story quest completion</p><button class="btn btn-primary btn-service" onclick="redirectService('Story Quest - $1')">Get Started</button></div>
+                <div class="service-card"><h3>World Quest (Big)</h3><p class="price">$5</p><p class="description">Large world quest series</p><button class="btn btn-primary btn-service" onclick="redirectService('World Quest (Big) - $5')">Get Started</button></div>
+                <div class="service-card"><h3>Small World Quests</h3><p class="price">$0.50</p><p class="description">Small world quest completion</p><button class="btn btn-primary btn-service" onclick="redirectService('Small World Quests - $0.50')">Get Started</button></div>
+                <div class="service-card"><h3>Archon Quests</h3><p class="price">$2</p><p class="description">Archon quest per act</p><button class="btn btn-primary btn-service" onclick="redirectService('Archon Quests - $2 per act')">Get Started</button></div>
+            </div>
+
+            <!-- Primo Farm -->
+            <div class="category-header">
+                <h2>💰 Primo Farm</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card"><h3>3$ per 10 Pull</h3><p class="price">$3</p><p class="description">Premium pulling service</p><button class="btn btn-primary btn-service" onclick="redirectService('3$ per 10 Pull')">Get Started</button></div>
+                <div class="service-card"><h3>80 Pulls (Discounted)</h3><p class="price">$20</p><p class="description">80 pull package (save 20%)</p><button class="btn btn-primary btn-service" onclick="redirectService('80 Pulls (Discounted) - $20')">Get Started</button></div>
+                <div class="service-card"><h3>Maintenance</h3><p class="price">$5</p><p class="description">Monthly maintenance fee</p><button class="btn btn-primary btn-service" onclick="redirectService('Maintenance - $5/month')">Get Started</button></div>
+            </div>
+
+            <!-- Important Note -->
+            <div class="note-section">
+                <div class="note-box">
+                    <h3>📌 Important Note</h3>
+                    <ul>
+                        <li>Some fees are applicable if 25% or more of the task has been completed</li>
+                        <li>Tasks not mentioned here are free or can be discussed with us</li>
+                        <li>Contact us on Discord for custom service requests</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REVIEWS SECTION -->
+    <section id="reviews" class="section">
+        <div class="reviews-header">
+            <h1>✨ Customer Reviews ✨</h1>
+            <p>We'd love to hear what you think about our service!</p>
+            <div class="cute-decoration">
+                <span class="star-icon">⭐</span>
+                <span class="star-icon">💫</span>
+                <span class="star-icon">✨</span>
+            </div>
+        </div>
+
+        <section class="add-review-section">
+            <div class="add-review-container">
+                <div class="review-form-wrapper">
+                    <div class="form-header">
+                        <h2>🎯 Share Your Experience!</h2>
+                        <p>Tell us about your service with Avalon Pilot</p>
+                    </div>
+                    
+                    <form id="reviewForm" class="review-form">
+                        <div class="form-group">
+                            <label for="name">
+                                <span class="label-icon">👤</span>
+                                Your Name
+                            </label>
+                            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="rating">
+                                <span class="label-icon">⭐</span>
+                                Rating
+                            </label>
+                            <div class="rating-selector">
+                                <input type="radio" id="star5" name="rating" value="5" required>
+                                <label for="star5" class="star-label">⭐⭐⭐⭐⭐</label>
+                                
+                                <input type="radio" id="star4" name="rating" value="4">
+                                <label for="star4" class="star-label">⭐⭐⭐⭐</label>
+                                
+                                <input type="radio" id="star3" name="rating" value="3">
+                                <label for="star3" class="star-label">⭐⭐⭐</label>
+                                
+                                <input type="radio" id="star2" name="rating" value="2">
+                                <label for="star2" class="star-label">⭐⭐</label>
+                                
+                                <input type="radio" id="star1" name="rating" value="1">
+                                <label for="star1" class="star-label">⭐</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="service">
+                                <span class="label-icon">🎮</span>
+                                Service Used
+                            </label>
+                            <input type="text" id="service" name="service" placeholder="e.g., Fontain Exploration" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="review">
+                                <span class="label-icon">💬</span>
+                                Your Review
+                            </label>
+                            <textarea id="review" name="review" rows="5" placeholder="Share your experience with us... (be honest!)" required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-submit">
+                            <span class="btn-icon">✨</span>
+                            Submit Your Review
+                        </button>
+                    </form>
+
+                    <div id="successMessage" class="success-message">
+                        <div class="success-content">
+                            <div class="success-icon">✅</div>
+                            <h3>Thank You!</h3>
+                            <p>Your review has been submitted successfully!</p>
+                            <button class="btn btn-primary" onclick="resetReviewForm()">Submit Another Review</button>
+                        </div>
+                    </div>
+
+                    <p class="review-note">📝 Note: We only display reviews from real customers who have used our services.</p>
+                </div>
+
+                <div class="review-illustration">
+                    <div class="cute-box">
+                        <div class="box-content">
+                            <span class="box-emoji">💝</span>
+                            <p>Your feedback helps us improve!</p>
+                        </div>
+                    </div>
+                    <div class="cute-box cute-box-2">
+                        <div class="box-content">
+                            <span class="box-emoji">🌟</span>
+                            <p>Be honest and help others decide</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="review-info-section">
+            <div class="info-cards">
+                <div class="info-card">
+                    <div class="info-icon">🎯</div>
+                    <h3>Why Leave a Review?</h3>
+                    <p>Your feedback helps us serve you better and helps other players find the best service</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">💯</div>
+                    <h3>Be Honest</h3>
+                    <p>Share both positive and constructive feedback. We're always learning and improving!</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">🚀</div>
+                    <h3>Make a Difference</h3>
+                    <p>Your review directly impacts how we improve our services for everyone</p>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- STATUS SECTION -->
+    <section id="status" class="section">
+        <div class="status-header">
+            <h1>Your Service Status</h1>
+            <p>Track your ongoing and completed services</p>
+        </div>
+
+        <div class="status-container">
+            <div class="lookup-box">
+                <h2>Check Your Order</h2>
+                <p>Enter your order number or contact Discord for real-time updates</p>
+                <form id="statusForm" class="status-form">
+                    <div class="form-group">
+                        <label for="orderNumber">Order Number</label>
+                        <input type="text" id="orderNumber" name="orderNumber" placeholder="e.g., AVL-2026-001">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search Order</button>
+                </form>
+                <div id="searchResult" class="search-result">
+                    <p id="resultMessage"></p>
+                </div>
+            </div>
+
+            <div class="orders-box">
+                <h2>Sample Order Format</h2>
+                <p>Your order number looks like this:</p>
+                <div class="order-example">AVL-2026-001</div>
+                <p>You'll receive this number when you complete your purchase on Ko-fi or Discord</p>
+            </div>
+        </div>
+
+        <section class="live-status-section">
+            <h2>Quick Status Updates</h2>
+            <p>For real-time status updates and live communication, contact us on Discord</p>
+            <div class="status-cards">
+                <div class="status-card">
+                    <div class="status-icon">⏳</div>
+                    <h3>In Progress</h3>
+                    <p>Your order is being worked on</p>
+                </div>
+                <div class="status-card">
+                    <div class="status-icon">✅</div>
+                    <h3>Completed</h3>
+                    <p>Your order is finished and ready</p>
+                </div>
+                <div class="status-card">
+                    <div class="status-icon">⏰</div>
+                    <h3>Pending</h3>
+                    <p>Your order is queued and will start soon</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-status-section">
+            <h2>Need Help Tracking Your Order?</h2>
+            <p>For immediate assistance and live status updates, reach out on Discord</p>
+            <div class="contact-buttons">
+                <a href="https://discord.com/users/not_shariff" target="_blank" class="btn btn-primary">📱 Contact on Discord</a>
+                <a href="http://ko-fi.com/avalon33778" target="_blank" class="btn btn-secondary">☕ Message on Ko-fi</a>
+            </div>
+        </section>
+
+        <section class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h3 onclick="toggleFAQ(this)">How long does a typical order take?</h3>
+                <p>Most orders are completed within 24-48 hours. Complex services may take longer. You'll get updates on Discord!</p>
+            </div>
+            <div class="faq-item">
+                <h3 onclick="toggleFAQ(this)">Can I track my order in real-time?</h3>
+                <p>Yes! Join our Discord server to chat with us and get live updates on your order status anytime.</p>
+            </div>
+            <div class="faq-item">
+                <h3 onclick="toggleFAQ(this)">What if something goes wrong with my order?</h3>
+                <p>Contact us immediately on Discord. We'll fix any issues and ensure you're completely satisfied!</p>
+            </div>
+            <div class="faq-item">
+                <h3 onclick="toggleFAQ(this)">How do I know when my order is complete?</h3>
+                <p>We'll notify you on Discord with a completion message. You can also check this page with your order number.</p>
+            </div>
+        </section>
+    </section>
+
+    <!-- TERMS SECTION -->
+    <section id="terms" class="section">
+        <div class="terms-header">
+            <h1>Terms of Service</h1>
+            <p>Last updated: April 25, 2026</p>
+        </div>
+
+        <section class="terms-section">
+            <div class="terms-content">
+                <h2>1. Agreement to Terms</h2>
+                <p>By using Avalon Pilot Service, you agree to comply with these Terms of Service. If you do not agree with any part of these terms, you may not use our services.</p>
+
+                <h2>2. Service Description</h2>
+                <p>Avalon Pilot Service provides account assistance services for Genshin Impact. Our pilots will help you complete various in-game tasks including exploration, character ascension, quest completion, and more.</p>
+
+                <h2>3. Account Access</h2>
+                <p>When you purchase our services, you will be required to provide your account credentials. You understand that:</p>
+                <ul>
+                    <li>We will only use your credentials for the agreed service</li>
+                    <li>We commit to maintaining the security and safety of your account</li>
+                    <li>You are responsible for any actions taken on your account</li>
+                    <li>We will not share your credentials with third parties</li>
+                </ul>
+
+                <h2>4. Payment Terms</h2>
+                <p>All payments are processed through Ko-fi or Discord. Payment must be completed before service begins. Prices are in USD and subject to change with notice.</p>
+                <ul>
+                    <li>Refunds are available if less than 25% of the task has been completed</li>
+                    <li>Once 25% or more of work is complete, the service fee applies</li>
+                    <li>No refunds after service completion</li>
+                </ul>
+
+                <h2>5. Service Delivery</h2>
+                <p>We will make reasonable efforts to complete your order within the estimated timeframe. However:</p>
+                <ul>
+                    <li>Delivery times are estimates and not guaranteed</li>
+                    <li>Game updates or server issues may cause delays</li>
+                    <li>We will keep you updated via Discord</li>
+                </ul>
+
+                <h2>6. User Responsibilities</h2>
+                <p>You agree to:</p>
+                <ul>
+                    <li>Provide accurate account information</li>
+                    <li>Not share your account access with others during our service</li>
+                    <li>Maintain the confidentiality of your login credentials</li>
+                    <li>Use our services legally and ethically</li>
+                    <li>Not modify account settings without notifying us</li>
+                </ul>
+
+                <h2>7. Prohibited Activities</h2>
+                <p>You may not:</p>
+                <ul>
+                    <li>Use our services for illegal purposes</li>
+                    <li>Attempt to reverse-engineer or disrupt our services</li>
+                    <li>Share account access with unauthorized parties</li>
+                    <li>Violate Genshin Impact's Terms of Service</li>
+                    <li>Harass or abuse our staff</li>
+                </ul>
+
+                <h2>8. Account Safety Disclaimer</h2>
+                <p>While we take every precaution to protect your account, we cannot guarantee that your account will not be flagged or banned by miHoYo. Account access by third parties carries inherent risks. By using our service, you acknowledge this risk.</p>
+
+                <h2>9. Limitation of Liability</h2>
+                <p>Avalon Pilot Service is provided "as is" without warranties. We are not liable for:</p>
+                <ul>
+                    <li>Account bans or suspensions</li>
+                    <li>Loss of game progress or items</li>
+                    <li>Service interruptions or delays</li>
+                    <li>Indirect or consequential damages</li>
+                </ul>
+
+                <h2>10. Contact Information</h2>
+                <p>For questions about these terms, contact us on:</p>
+                <ul>
+                    <li>Discord: not_shariff</li>
+                    <li>Ko-fi: http://ko-fi.com/avalon33778</li>
+                </ul>
+
+                <hr>
+
+                <p class="terms-footer">By using Avalon Pilot Service, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service.</p>
+            </div>
+        </section>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a onclick="showSection('home')">Home</a></li>
+                    <li><a onclick="showSection('pricing')">Services</a></li>
+                    <li><a onclick="showSection('reviews')">Reviews</a></li>
+                    <li><a onclick="showSection('status')">Order Status</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="https://discord.com/users/not_shariff" target="_blank">Discord: not_shariff</a></li>
+                    <li><a href="http://ko-fi.com/avalon33778" target="_blank">Ko-fi Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a onclick="showSection('terms')">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Avalon Pilot Service. All rights reserved. ⚓</p>
+        </div>
+    </footer>
+
+    <script>
+        // ==================== 
+        // SECTION NAVIGATION
+        // ==================== 
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+            
+            // Close mobile menu
+            document.querySelector('.hamburger').classList.remove('active');
+            document.querySelector('.nav-links').classList.remove('active');
+        }
+
+        // ==================== 
+        // HAMBURGER MENU
+        // ==================== 
+        function toggleMenu() {
+            document.querySelector('.hamburger').classList.toggle('active');
+            document.querySelector('.nav-links').classList.toggle('active');
+        }
+
+        // Close menu when a link is clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.hamburger').classList.remove('active');
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+
+        // ==================== 
+        // SCROLL TO FEATURES
+        // ==================== 
+        function scrollToFeatures() {
+            document.querySelector('.features').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // ==================== 
+        // REDIRECT TO DISCORD/KOFI
+        // ==================== 
+        function redirectService(serviceName) {
+            const message = `You selected: ${serviceName}\n\nYou will be redirected to Ko-fi to complete your purchase.`;
+            
+            if (confirm(message)) {
+                window.open('http://ko-fi.com/avalon33778', '_blank');
+                
+                setTimeout(() => {
+                    const discordConfirm = confirm('For faster communication, would you like to contact us on Discord? (not_shariff)');
+                    if (discordConfirm) {
+                        window.open('https://discord.com/users/not_shariff', '_blank');
+                    }
+                }, 1000);
+            }
+        }
+
+        // ==================== 
+        // REVIEW FORM SUBMISSION
+        // ==================== 
+        const reviewForm = document.getElementById('reviewForm');
+        if (reviewForm) {
+            reviewForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value.trim();
+                const rating = document.querySelector('input[name="rating"]:checked').value;
+                const service = document.getElementById('service').value.trim();
+                const review = document.getElementById('review').value.trim();
+                
+                if (!name || !rating || !service || !review) {
+                    alert('❌ Please fill in all fields!');
+                    return;
+                }
+
+                if (review.length < 20) {
+                    alert('❌ Please write at least 20 characters in your review');
+                    return;
+                }
+
+                const successMsg = document.getElementById('successMessage');
+                successMsg.style.display = 'flex';
+                
+                setTimeout(() => {
+                    successMsg.style.display = 'none';
+                }, 5000);
+
+                console.log({
+                    name,
+                    rating,
+                    service,
+                    review,
+                    submittedAt: new Date().toLocaleString()
+                });
+
+                reviewForm.reset();
+            });
+        }
+
+        function resetReviewForm() {
+            const successMsg = document.getElementById('successMessage');
+            successMsg.style.display = 'none';
+            
+            if (reviewForm) {
+                reviewForm.reset();
+                document.getElementById('name').focus();
+            }
+        }
+
+        // ==================== 
+        // STATUS FORM SUBMISSION
+        // ==================== 
+        const statusForm = document.getElementById('statusForm');
+        if (statusForm) {
+            statusForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const orderNumber = document.getElementById('orderNumber').value;
+                const resultDiv = document.getElementById('searchResult');
+                const resultMessage = document.getElementById('resultMessage');
+                
+                if (orderNumber.match(/^AVL-\d{4}-\d{3}$/)) {
+                    resultMessage.innerHTML = `✅ Order <strong>${orderNumber}</strong> found!<br>Status: In Progress<br><br>For real-time updates, please contact us on Discord at <strong>not_shariff</strong>`;
+                    resultDiv.style.display = 'block';
+                } else {
+                    resultMessage.innerHTML = `⚠️ Order number not found.<br>Please check your order number format: AVL-YYYY-###<br><br>Need help? Contact us on Discord!`;
+                    resultDiv.style.display = 'block';
+                    resultDiv.style.background = 'rgba(239, 68, 68, 0.1)';
+                    resultDiv.style.borderColor = '#ef4444';
+                    resultDiv.style.color = '#fca5a5';
+                }
+            });
+        }
+
+        // ==================== 
+        // FAQ ACCORDION
+        // ==================== 
+        function toggleFAQ(element) {
+            const faqItem = element.parentElement;
+            faqItem.classList.toggle('active');
+        }
+
+        console.log('Avalon Pilot Service - Website loaded successfully! 🎮⚓');
+    </script>
+</body>
+</html>
