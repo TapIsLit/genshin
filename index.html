@@ -235,6 +235,37 @@
         }
 
         /* ==================== 
+           GAME GALLERY
+           ==================== */
+        .game-gallery {
+            max-width: 1200px;
+            margin: 3rem auto 2rem;
+            padding: 0 2rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 15px;
+            border: 2px solid #334155;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .gallery-image:hover {
+            transform: translateY(-8px);
+            border-color: #6366f1;
+            box-shadow: 0 20px 50px rgba(99, 102, 241, 0.3);
+        }
+
+        /* ==================== 
            BUTTONS
            ==================== */
         .btn {
@@ -1145,6 +1176,10 @@
             .toggle-btn {
                 width: 100%;
             }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1282,6 +1317,15 @@
         <div class="pricing-section">
             <!-- GENSHIN IMPACT SERVICES -->
             <div id="genshin-pricing" class="game-pricing active">
+                <!-- Genshin Gallery -->
+                <div class="game-gallery">
+                    <div class="gallery-grid">
+                        <img src="genshin1.jpg" alt="Genshin Impact 1" class="gallery-image">
+                        <img src="genshin2.jpg" alt="Genshin Impact 2" class="gallery-image">
+                        <img src="genshin3.jpg" alt="Genshin Impact 3" class="gallery-image">
+                    </div>
+                </div>
+
                 <!-- Exploration -->
                 <div class="category-header">
                     <h2>🗺️ Exploration Services</h2>
@@ -1389,6 +1433,15 @@
 
             <!-- WUTHERING WAVES SERVICES -->
             <div id="wuthering-pricing" class="game-pricing">
+                <!-- Wuthering Waves Gallery -->
+                <div class="game-gallery">
+                    <div class="gallery-grid">
+                        <img src="wuva1.jpg" alt="Wuthering Waves 1" class="gallery-image">
+                        <img src="wuva2.jpg" alt="Wuthering Waves 2" class="gallery-image">
+                        <img src="wuva3.jpg" alt="Wuthering Waves 3" class="gallery-image">
+                    </div>
+                </div>
+
                 <!-- Character Building -->
                 <div class="category-header">
                     <h2>✨ Character Building</h2>
@@ -1488,6 +1541,15 @@
 
             <!-- HONKAI: STAR RAIL SERVICES -->
             <div id="honkai-pricing" class="game-pricing">
+                <!-- Honkai Star Rail Gallery -->
+                <div class="game-gallery">
+                    <div class="gallery-grid">
+                        <img src="hsr1.jpg" alt="Honkai Star Rail 1" class="gallery-image">
+                        <img src="hsr2.jpg" alt="Honkai Star Rail 2" class="gallery-image">
+                        <img src="hsr3.jpg" alt="Honkai Star Rail 3" class="gallery-image">
+                    </div>
+                </div>
+
                 <!-- Jade Hunt -->
                 <div class="category-header">
                     <h2>💰 Jade Hunt</h2>
@@ -1579,7 +1641,7 @@
             <h1>✨ Customer Reviews ✨</h1>
             <p>We'd love to hear what you think about our service!</p>
             <div class="cute-decoration">
-                <span class="star-icon">���</span>
+                <span class="star-icon">⭐</span>
                 <span class="star-icon">💫</span>
                 <span class="star-icon">✨</span>
             </div>
