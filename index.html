@@ -1275,6 +1275,7 @@
             <div class="toggle-buttons">
                 <button class="toggle-btn active" onclick="switchGame('genshin')">🌟 Genshin Impact</button>
                 <button class="toggle-btn" onclick="switchGame('wuthering')">🌊 Wuthering Waves</button>
+                <button class="toggle-btn" onclick="switchGame('honkai')">⭐ Honkai: Star Rail</button>
             </div>
         </div>
 
@@ -1483,6 +1484,91 @@
                     </div>
                 </div>
             </div>
+
+            <!-- HONKAI: STAR RAIL SERVICES -->
+            <div id="honkai-pricing" class="game-pricing">
+                <!-- Jade Hunt -->
+                <div class="category-header">
+                    <h2>💰 Jade Hunt</h2>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card"><h3>Per 10 Wishes</h3><p class="price">$3</p><p class="description">Per 10 wishes service</p><button class="btn btn-primary btn-service" onclick="redirectService('Per 10 Wishes - $3')">Get Started</button></div>
+                    <div class="service-card"><h3>80 Wishes</h3><p class="price">$20</p><p class="description">80 wishes package (save 20%)</p><button class="btn btn-primary btn-service" onclick="redirectService('80 Wishes - $20')">Get Started</button></div>
+                </div>
+
+                <!-- Maintenance -->
+                <div class="category-header">
+                    <h2>🔧 Maintenance</h2>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card"><h3>1 Month</h3><p class="price">$3</p><p class="description">Includes BP + comms + Power burn + simulated universe</p><button class="btn btn-primary btn-service" onclick="redirectService('Maintenance 1 Month - $3')">Get Started</button></div>
+                </div>
+
+                <!-- Character Building -->
+                <div class="category-header">
+                    <h2>✨ Character Building</h2>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card"><h3>Character Lvl 1 > 80</h3><p class="price">$3</p><p class="description">Level 1 to 80 ascension</p><button class="btn btn-primary btn-service" onclick="redirectService('Character Lvl 1 > 80 - $3')">Get Started</button></div>
+                    <div class="service-card"><h3>Character Lvl 80 > 90</h3><p class="price">$4</p><p class="description">Level 80 to 90 ascension</p><button class="btn btn-primary btn-service" onclick="redirectService('Character Lvl 80 > 90 - $4')">Get Started</button></div>
+                    <div class="service-card"><h3>Character Farm (Full)</h3><p class="price">$10</p><p class="description">Relics, traces, ornaments, ascension, weapon</p><button class="btn btn-primary btn-service" onclick="redirectService('Character Farm (Full) - $10')">Get Started</button></div>
+                    <div class="service-card"><h3>Relics</h3><p class="price">$5</p><p class="description">Relic farming service</p><button class="btn btn-primary btn-service" onclick="redirectService('Relics - $5')">Get Started</button></div>
+                    <div class="service-card"><h3>Trace (max)</h3><p class="price">$3</p><p class="description">Trace leveling to max</p><button class="btn btn-primary btn-service" onclick="redirectService('Trace (max) - $3')">Get Started</button></div>
+                </div>
+
+                <!-- Exploration -->
+                <div class="category-header">
+                    <h2>🗺️ Exploration</h2>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card"><h3>Full Jarilo-IV</h3><p class="price">$3</p><p class="description">Complete Jarilo-IV exploration</p><button class="btn btn-primary btn-service" onclick="redirectService('Full Jarilo-IV - $3')">Get Started</button></div>
+                    <div class="service-card"><h3>Full Xianzhou</h3><p class="price">$10</p><p class="description">Complete Xianzhou exploration</p><button class="btn btn-primary btn-service" onclick="redirectService('Full Xianzhou - $10')">Get Started</button></div>
+                    <div class="service-card"><h3>Full Penacony</h3><p class="price">$18</p><p class="description">Complete Penacony exploration</p><button class="btn btn-primary btn-service" onclick="redirectService('Full Penacony - $18')">Get Started</button></div>
+                    <div class="service-card"><h3>Full Amphoreus</h3><p class="price">$25</p><p class="description">Complete Amphoreus exploration</p><button class="btn btn-primary btn-service" onclick="redirectService('Full Amphoreus - $25')">Get Started</button></div>
+                </div>
+
+                <!-- Missions -->
+                <div class="category-header">
+                    <h2>🎯 Missions</h2>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card"><h3>Per Trailblaze Continuance</h3><p class="price">$5</p><p class="description">Trailblaze continuance completion</p><button class="btn btn-primary btn-service" onclick="redirectService('Per Trailblaze Continuance - $5')">Get Started</button></div>
+                    <div class="service-card"><h3>Trailblazer Mission (per act)</h3><p class="price">$2-$5</p><p class="description">Trailblazer mission per act</p><button class="btn btn-primary btn-service" onclick="redirectService('Trailblazer Mission (per act) - $2-$5')">Get Started</button></div>
+                    <div class="service-card"><h3>Per Companion Quest</h3><p class="price">$0.50</p><p class="description">Companion quest completion</p><button class="btn btn-primary btn-service" onclick="redirectService('Per Companion Quest - $0.50')">Get Started</button></div>
+                    <div class="service-card"><h3>Per Small Quest</h3><p class="price">$1</p><p class="description">Small quest completion</p><button class="btn btn-primary btn-service" onclick="redirectService('Per Small Quest - $1')">Get Started</button></div>
+                </div>
+
+                <!-- Endgame Modes -->
+                <div class="category-header">
+                    <h2>🎮 Endgame Modes</h2>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card"><h3>Divergent Uni</h3><p class="price">$1</p><p class="description">Divergent Universe service</p><button class="btn btn-primary btn-service" onclick="redirectService('Divergent Uni - $1')">Get Started</button></div>
+                    <div class="service-card"><h3>Memory of Chaos</h3><p class="price">$3</p><p class="description">Memory of Chaos service</p><button class="btn btn-primary btn-service" onclick="redirectService('Memory of Chaos - $3')">Get Started</button></div>
+                    <div class="service-card"><h3>Pure Fiction</h3><p class="price">$3</p><p class="description">Pure Fiction service</p><button class="btn btn-primary btn-service" onclick="redirectService('Pure Fiction - $3')">Get Started</button></div>
+                    <div class="service-card"><h3>Apocalyptic Shadow</h3><p class="price">$3</p><p class="description">Apocalyptic Shadow service</p><button class="btn btn-primary btn-service" onclick="redirectService('Apocalyptic Shadow - $3')">Get Started</button></div>
+                </div>
+
+                <!-- Events -->
+                <div class="category-header">
+                    <h2>🎉 Events</h2>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card"><h3>Big Events</h3><p class="price">$5</p><p class="description">Large event completion</p><button class="btn btn-primary btn-service" onclick="redirectService('Big Events - $5')">Get Started</button></div>
+                    <div class="service-card"><h3>Small Events</h3><p class="price">$2</p><p class="description">Small event completion</p><button class="btn btn-primary btn-service" onclick="redirectService('Small Events - $2')">Get Started</button></div>
+                </div>
+
+                <div class="note-section">
+                    <div class="note-box">
+                        <h3>📌 Important Note</h3>
+                        <ul>
+                            <li>Some fees are applicable if 25% or more of the task has been completed</li>
+                            <li>Tasks not mentioned here are free or can be discussed with us</li>
+                            <li>Contact us on Discord for custom service requests</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -1492,7 +1578,7 @@
             <h1>✨ Customer Reviews ✨</h1>
             <p>We'd love to hear what you think about our service!</p>
             <div class="cute-decoration">
-                <span class="star-icon">⭐</span>
+                <span class="star-icon">���</span>
                 <span class="star-icon">💫</span>
                 <span class="star-icon">✨</span>
             </div>
@@ -1657,7 +1743,7 @@
                 <p>By using Kumori Pilot Service, you agree to comply with these Terms of Service. If you do not agree with any part of these terms, you may not use our services.</p>
 
                 <h2>2. Service Description</h2>
-                <p>Kumori Pilot Service provides account assistance services for Genshin Impact and Wuthering Waves. Our pilots will help you complete various in-game tasks including exploration, character building, quest completion, and more.</p>
+                <p>Kumori Pilot Service provides account assistance services for Genshin Impact, Wuthering Waves, and Honkai: Star Rail. Our pilots will help you complete various in-game tasks including exploration, character building, quest completion, and more.</p>
 
                 <h2>3. Account Access</h2>
                 <p>When you purchase our services, you will be required to provide your account credentials. You understand that:</p>
@@ -1789,6 +1875,9 @@
             } else if (game === 'wuthering') {
                 document.getElementById('wuthering-pricing').classList.add('active');
                 document.querySelectorAll('.toggle-btn')[1].classList.add('active');
+            } else if (game === 'honkai') {
+                document.getElementById('honkai-pricing').classList.add('active');
+                document.querySelectorAll('.toggle-btn')[2].classList.add('active');
             }
         }
 
