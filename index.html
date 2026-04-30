@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kumori Pilot Service - Genshin Impact Services</title>
+    <title>Kumori Pilot Service - Game Services</title>
     <style>
         /* ==================== 
            ROOT & VARIABLES
@@ -27,9 +27,6 @@
             --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.4);
         }
 
-        /* ==================== 
-           GLOBAL STYLES
-           ==================== */
         * {
             margin: 0;
             padding: 0;
@@ -145,9 +142,6 @@
             transition: all 0.3s ease;
         }
 
-        /* ==================== 
-           SECTIONS
-           ==================== */
         .section {
             display: none;
         }
@@ -368,6 +362,45 @@
         }
 
         /* ==================== 
+           GAME TOGGLE
+           ==================== */
+        .game-toggle {
+            text-align: center;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .toggle-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .toggle-btn {
+            padding: 0.75rem 2rem;
+            border: 2px solid #6366f1;
+            background: transparent;
+            color: #6366f1;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-btn.active {
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+            color: white;
+            border-color: #ec4899;
+        }
+
+        .toggle-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        /* ==================== 
            PRICING SECTION
            ==================== */
         .pricing-header {
@@ -394,6 +427,14 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem 4rem;
+        }
+
+        .game-pricing {
+            display: none;
+        }
+
+        .game-pricing.active {
+            display: block;
         }
 
         .category-header {
@@ -818,215 +859,102 @@
         }
 
         /* ==================== 
-           STATUS SECTION
+           DISCORD BOT SECTION
            ==================== */
-        .status-header {
+        .discord-bot-section {
+            max-width: 1000px;
+            margin: 4rem auto;
+            padding: 0 2rem 4rem;
             text-align: center;
-            padding: 4rem 2rem 2rem;
-            margin-top: 80px;
         }
 
-        .status-header h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
+        .discord-bot-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
             background: linear-gradient(135deg, #6366f1, #ec4899);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .status-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            margin-bottom: 4rem;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-            padding: 0 2rem;
+        .bot-card {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
+            border: 2px solid #6366f1;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 2rem;
         }
 
-        .lookup-box,
-        .orders-box {
-            background: #1e293b;
-            border: 1px solid #334155;
-            border-radius: 15px;
-            padding: 2.5rem;
+        .bot-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
         }
 
-        .lookup-box h2,
-        .orders-box h2 {
+        .bot-card h3 {
+            font-size: 1.8rem;
             margin-bottom: 1rem;
             color: #f1f5f9;
         }
 
-        .lookup-box > p,
-        .orders-box > p {
+        .bot-card p {
             color: #cbd5e1;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
         }
 
-        .status-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .search-result {
-            margin-top: 1.5rem;
-            padding: 1rem;
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid #10b981;
-            border-radius: 8px;
-            color: #10b981;
-            text-align: center;
-            display: none;
-        }
-
-        .order-example {
-            background: #0f172a;
-            border: 2px solid #6366f1;
-            padding: 1.5rem;
-            border-radius: 10px;
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: #6366f1;
-            text-align: center;
-            margin: 1rem 0;
-        }
-
-        .live-status-section {
-            text-align: center;
-            padding: 4rem 2rem;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
-            border-radius: 15px;
-            margin-bottom: 4rem;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .live-status-section h2 {
-            margin-bottom: 0.5rem;
-            color: #f1f5f9;
-        }
-
-        .status-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .status-card {
+        .bot-commands {
             background: #1e293b;
             border: 1px solid #334155;
             border-radius: 12px;
             padding: 2rem;
-            text-align: center;
-            transition: all 0.3s ease;
+            margin: 2rem 0;
+            text-align: left;
         }
 
-        .status-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .status-icon {
-            font-size: 3rem;
+        .bot-commands h4 {
+            color: #6366f1;
             margin-bottom: 1rem;
+            text-align: center;
         }
 
-        .status-card h3 {
-            margin-bottom: 0.5rem;
-            color: #f1f5f9;
+        .command {
+            background: rgba(15, 23, 42, 0.5);
+            border-left: 3px solid #ec4899;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            border-radius: 8px;
         }
 
-        .status-card p {
+        .command-name {
+            color: #a78bfa;
+            font-weight: bold;
+            font-family: monospace;
+        }
+
+        .command-description {
             color: #cbd5e1;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
         }
 
-        .contact-status-section {
-            text-align: center;
-            padding: 3rem 2rem;
-            max-width: 800px;
-            margin: 0 auto 4rem;
-        }
-
-        .contact-status-section h2 {
-            margin-bottom: 1rem;
-            color: #f1f5f9;
-        }
-
-        .contact-status-section p {
-            color: #cbd5e1;
-            margin-bottom: 2rem;
-        }
-
-        .contact-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        /* ==================== 
-           FAQ SECTION
-           ==================== */
-        .faq-section {
-            max-width: 1000px;
-            margin: 4rem auto;
-            padding: 0 2rem 4rem;
-        }
-
-        .faq-section h2 {
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            background: linear-gradient(135deg, #6366f1, #ec4899);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .faq-item {
-            background: #1e293b;
-            border: 1px solid #334155;
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .faq-item:hover {
-            border-color: #6366f1;
-        }
-
-        .faq-item h3 {
-            margin: 0;
-            color: #f1f5f9;
-            display: flex;
-            justify-content: space-between;
+        .discord-button {
+            display: inline-flex;
             align-items: center;
-        }
-
-        .faq-item h3::after {
-            content: "▼";
+            gap: 0.5rem;
+            background: #5865f2;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
             transition: all 0.3s ease;
+            font-size: 1.1rem;
         }
 
-        .faq-item.active h3::after {
-            transform: rotate(180deg);
-        }
-
-        .faq-item p {
-            display: none;
-            margin-top: 1rem;
-            color: #cbd5e1;
-        }
-
-        .faq-item.active p {
-            display: block;
+        .discord-button:hover {
+            background: #4752c4;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(88, 101, 242, 0.3);
         }
 
         /* ==================== 
@@ -1200,15 +1128,22 @@
                 width: 100%;
             }
 
-            .status-container,
             .add-review-container {
                 grid-template-columns: 1fr;
             }
 
             .service-card,
             .feature-card,
-            .faq-item {
+            .info-card {
                 padding: 1.5rem;
+            }
+
+            .toggle-buttons {
+                flex-direction: column;
+            }
+
+            .toggle-btn {
+                width: 100%;
             }
         }
 
@@ -1219,8 +1154,8 @@
 
             .features h2,
             .reviews-header h1,
-            .status-header h1,
-            .pricing-header h1 {
+            .pricing-header h1,
+            .discord-bot-section h2 {
                 font-size: 2rem;
             }
 
@@ -1250,13 +1185,12 @@
         <div class="nav-container">
             <div class="logo">
                 <span class="logo-icon">⚓</span>
-                <span class="logo-text">Kumori Pilots</span>
+                <span class="logo-text">Kumori Pilot</span>
             </div>
             <ul class="nav-links">
                 <li><a onclick="showSection('home')">Home</a></li>
                 <li><a onclick="showSection('pricing')">Services & Pricing</a></li>
                 <li><a onclick="showSection('reviews')">Reviews</a></li>
-                <li><a onclick="showSection('status')">Order Status</a></li>
                 <li><a onclick="showSection('terms')">Terms</a></li>
             </ul>
             <div class="hamburger" onclick="toggleMenu()">
@@ -1269,13 +1203,12 @@
 
     <!-- HOME SECTION -->
     <section id="home" class="section active">
-        <!-- Hero Section -->
         <div class="hero">
             <div class="hero-content">
                 <div class="hero-text">
                     <h1>Welcome to Kumori Pilot Service</h1>
-                    <p class="subtitle">Your trusted Genshin Impact assistance hub</p>
-                    <p class="description">Struggling with exploration, domains, or character ascension? Let our experienced pilots help you sail smoothly through Teyvat!</p>
+                    <p class="subtitle">Your trusted gaming assistance hub</p>
+                    <p class="description">Struggling with exploration, quests, or character building? Let our experienced pilots help you progress smoothly in your favorite games!</p>
                     <div class="hero-buttons">
                         <a class="btn btn-primary" onclick="showSection('pricing')">View Our Services</a>
                         <a class="btn btn-secondary" onclick="scrollToFeatures()">Learn More</a>
@@ -1288,7 +1221,6 @@
             </div>
         </div>
 
-        <!-- Features Section -->
         <section class="features">
             <h2>Why Choose Kumori?</h2>
             <div class="features-grid">
@@ -1325,7 +1257,6 @@
             </div>
         </section>
 
-        <!-- CTA Section -->
         <section class="cta-section">
             <h2>Ready to Get Started?</h2>
             <p>Browse our services and choose what you need</p>
@@ -1340,109 +1271,216 @@
             <p>Choose the service that fits your needs</p>
         </div>
 
+        <div class="game-toggle">
+            <div class="toggle-buttons">
+                <button class="toggle-btn active" onclick="switchGame('genshin')">🌟 Genshin Impact</button>
+                <button class="toggle-btn" onclick="switchGame('wuthering')">🌊 Wuthering Waves</button>
+            </div>
+        </div>
+
         <div class="pricing-section">
-            <!-- Exploration -->
-            <div class="category-header">
-                <h2>🗺️ Exploration Services</h2>
-            </div>
-            <div class="services-grid">
-                <div class="service-card"><h3>Mondstadt</h3><p class="price">$8</p><p class="description">Complete Monstad exploration assistance</p><button class="btn btn-primary btn-service" onclick="redirectService('Monstad - $8')">Get Started</button></div>
-                <div class="service-card"><h3>Dragonspine</h3><p class="price">$5</p><p class="description">DragonSpine region exploration</p><button class="btn btn-primary btn-service" onclick="redirectService('DragonSpine - $5')">Get Started</button></div>
-                <div class="service-card"><h3>Liyue</h3><p class="price">$10</p><p class="description">Full Liyue exploration package</p><button class="btn btn-primary btn-service" onclick="redirectService('Liyue - $10')">Get Started</button></div>
-                <div class="service-card"><h3>Chenyue Vale</h3><p class="price">$5</p><p class="description">Chenyue Valley exploration</p><button class="btn btn-primary btn-service" onclick="redirectService('Chenyue Val - $5')">Get Started</button></div>
-                <div class="service-card"><h3>Chasm</h3><p class="price">$15</p><p class="description">The Chasm complete exploration</p><button class="btn btn-primary btn-service" onclick="redirectService('Chasm - $15')">Get Started</button></div>
-                <div class="service-card"><h3>Inazuma</h3><p class="price">$5</p><p class="description">Inazuma region exploration</p><button class="btn btn-primary btn-service" onclick="redirectService('Inazuma - $5')">Get Started</button></div>
-                <div class="service-card"><h3>Enkanomiya</h3><p class="price">$5</p><p class="description">Enkanomiya exploration assistance</p><button class="btn btn-primary btn-service" onclick="redirectService('Enkanomiya - $5')">Get Started</button></div>
-                <div class="service-card"><h3>Sumeru (forest)</h3><p class="price">$30</p><p class="description">Summerforest complete package</p><button class="btn btn-primary btn-service" onclick="redirectService('Summerforest - $30')">Get Started</button></div>
-                <div class="service-card"><h3>Sumeru (desert)</h3><p class="price">$20</p><p class="description">Summerdesert exploration</p><button class="btn btn-primary btn-service" onclick="redirectService('Summerdesert - $20')">Get Started</button></div>
-                <div class="service-card"><h3>Hadrammahaveth</h3><p class="price">$10</p><p class="description">Hadrammahaveth region</p><button class="btn btn-primary btn-service" onclick="redirectService('Hadrammahaveth - $10')">Get Started</button></div>
-                <div class="service-card"><h3>Fontaine</h3><p class="price">$30</p><p class="description">Fontaine full exploration</p><button class="btn btn-primary btn-service" onclick="redirectService('Fontain - $30')">Get Started</button></div>
-                <div class="service-card"><h3>Sea of Bygone Eras</h3><p class="price">$10</p><p class="description">Sea of Bygone Eras exploration</p><button class="btn btn-primary btn-service" onclick="redirectService('Sea of Bygone Eras - $10')">Get Started</button></div>
-                <div class="service-card"><h3>Natlan</h3><p class="price">$40</p><p class="description">Natlan complete exploration</p><button class="btn btn-primary btn-service" onclick="redirectService('Natlan - $40')">Get Started</button></div>
+            <!-- GENSHIN IMPACT SERVICES -->
+            <div id="genshin-pricing" class="game-pricing active">
+                <!-- Exploration -->
+                <div class="category-header">
+                    <h2>🗺️ Exploration Services</h2>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card"><h3>Mondstadt</h3><p class="price">$8</p><p class="description">Complete Mondstadt exploration assistance</p><button class="btn btn-primary btn-service" onclick="redirectService('Mondstadt - $8')">Get Started</button></div>
+                    <div class="service-card"><h3>Dragonspine</h3><p class="price">$5</p><p class="description">Dragonspine region exploration</p><button class="btn btn-primary btn-service" onclick="redirectService('Dragonspine - $5')">Get Started</button></div>
+                    <div class="service-card"><h3>Liyue</h3><p class="price">$10</p><p class="description">Full Liyue exploration package</p><button class="btn btn-primary btn-service" onclick="redirectService('Liyue - $10')">Get Started</button></div>
+                    <div class="service-card"><h3>Chenyue Valley</h3><p class="price">$5</p><p class="description">Chenyue Valley exploration</p><button class="btn btn-primary btn-service" onclick="redirectService('Chenyue Valley - $5')">Get Started</button></div>
+                    <div class="service-card"><h3>The Chasm</h3><p class="price">$15</p><p class="description">The Chasm complete exploration</p><button class="btn btn-primary btn-service" onclick="redirectService('The Chasm - $15')">Get Started</button></div>
+                    <div class="service-card"><h3>Inazuma</h3><p class="price">$5</p><p class="description">Inazuma region exploration</p><button class="btn btn-primary btn-service" onclick="redirectService('Inazuma - $5')">Get Started</button></div>
+                    <div class="service-card"><h3>Enkanomiya</h3><p class="price">$5</p><p class="description">Enkanomiya exploration assistance</p><button class="btn btn-primary btn-service" onclick="redirectService('Enkanomiya - $5')">Get Started</button></div>
+                    <div class="service-card"><h3>Summerforest</h3><p class="price">$30</p><p class="description">Summerforest complete package</p><button class="btn btn-primary btn-service" onclick="redirectService('Summerforest - $30')">Get Started</button></div>
+                    <div class="service-card"><h3>Summerdesert</h3><p class="price">$20</p><p class="description">Summerdesert exploration</p><button class="btn btn-primary btn-service" onclick="redirectService('Summerdesert - $20')">Get Started</button></div>
+                    <div class="service-card"><h3>Hadrammahaveth</h3><p class="price">$10</p><p class="description">Hadrammahaveth region</p><button class="btn btn-primary btn-service" onclick="redirectService('Hadrammahaveth - $10')">Get Started</button></div>
+                    <div class="service-card"><h3>Fontaine</h3><p class="price">$30</p><p class="description">Fontaine full exploration</p><button class="btn btn-primary btn-service" onclick="redirectService('Fontaine - $30')">Get Started</button></div>
+                    <div class="service-card"><h3>Sea of Bygone Eras</h3><p class="price">$10</p><p class="description">Sea of Bygone Eras exploration</p><button class="btn btn-primary btn-service" onclick="redirectService('Sea of Bygone Eras - $10')">Get Started</button></div>
+                    <div class="service-card"><h3>Natlan</h3><p class="price">$40</p><p class="description">Natlan complete exploration</p><button class="btn btn-primary btn-service" onclick="redirectService('Natlan - $40')">Get Started</button></div>
+                </div>
+
+                <!-- Oculi Collection -->
+                <div class="category-header">
+                    <h2>👁️ Oculi Collection</h2>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card"><h3>Anemoculus</h3><p class="price">$3</p><p class="description">Anemoculus collection service</p><button class="btn btn-primary btn-service" onclick="redirectService('Anemoculus - $3')">Get Started</button></div>
+                    <div class="service-card"><h3>Frostbearing Tree</h3><p class="price">$5</p><p class="description">Frostbearing Tree upgrade</p><button class="btn btn-primary btn-service" onclick="redirectService('Frostbearing Tree - $5')">Get Started</button></div>
+                    <div class="service-card"><h3>Geoculus</h3><p class="price">$7</p><p class="description">Geoculus collection</p><button class="btn btn-primary btn-service" onclick="redirectService('Geoculus - $7')">Get Started</button></div>
+                    <div class="service-card"><h3>Lumensstone</h3><p class="price">$10</p><p class="description">Lumensstone collection</p><button class="btn btn-primary btn-service" onclick="redirectService('Lumensstone - $10')">Get Started</button></div>
+                    <div class="service-card"><h3>Rainjade Oblation</h3><p class="price">$10</p><p class="description">Rainjade Oblation service</p><button class="btn btn-primary btn-service" onclick="redirectService('Rainjade Oblation - $10')">Get Started</button></div>
+                    <div class="service-card"><h3>Electroculus</h3><p class="price">$10</p><p class="description">Electroculus collection</p><button class="btn btn-primary btn-service" onclick="redirectService('Electroculus - $10')">Get Started</button></div>
+                    <div class="service-card"><h3>Dendroculus</h3><p class="price">$20</p><p class="description">Dendroculus collection</p><button class="btn btn-primary btn-service" onclick="redirectService('Dendroculus - $20')">Get Started</button></div>
+                    <div class="service-card"><h3>Hydroculus</h3><p class="price">$15</p><p class="description">Hydroculus collection</p><button class="btn btn-primary btn-service" onclick="redirectService('Hydroculus - $15')">Get Started</button></div>
+                    <div class="service-card"><h3>Pyroculus</h3><p class="price">$15</p><p class="description">Pyroculus collection</p><button class="btn btn-primary btn-service" onclick="redirectService('Pyroculus - $15')">Get Started</button></div>
+                    <div class="service-card"><h3>Amrita Pool</h3><p class="price">$2</p><p class="description">Amrita Pool assistance</p><button class="btn btn-primary btn-service" onclick="redirectService('Amrita Pool - $2')">Get Started</button></div>
+                </div>
+
+                <!-- Character Building -->
+                <div class="category-header">
+                    <h2>✨ Character Building</h2>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card"><h3>Lvl 1 > 80</h3><p class="price">$5</p><p class="description">Level 1 to 80 ascension</p><button class="btn btn-primary btn-service" onclick="redirectService('Lvl 1 > 80 - $5')">Get Started</button></div>
+                    <div class="service-card"><h3>Lvl 80 > 90</h3><p class="price">$3</p><p class="description">Level 80 to 90 ascension</p><button class="btn btn-primary btn-service" onclick="redirectService('Lvl 80 > 90 - $3')">Get Started</button></div>
+                    <div class="service-card"><h3>Lvl 1 > 90</h3><p class="price">$8</p><p class="description">Complete level ascension</p><button class="btn btn-primary btn-service" onclick="redirectService('Lvl 1 > 90 - $8')">Get Started</button></div>
+                    <div class="service-card"><h3>Echoes</h3><p class="price">$5</p><p class="description">Echo farming service</p><button class="btn btn-primary btn-service" onclick="redirectService('Echoes - $5')">Get Started</button></div>
+                    <div class="service-card"><h3>Talents</h3><p class="price">$5</p><p class="description">Talent leveling service</p><button class="btn btn-primary btn-service" onclick="redirectService('Talents - $5')">Get Started</button></div>
+                </div>
+
+                <!-- Miscellaneous -->
+                <div class="category-header">
+                    <h2>🎁 Miscellaneous Services</h2>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card"><h3>Teapot</h3><p class="price">$5</p><p class="description">Serenitea Pot setup</p><button class="btn btn-primary btn-service" onclick="redirectService('Teapot - $5')">Get Started</button></div>
+                    <div class="service-card"><h3>Small Events</h3><p class="price">$2</p><p class="description">Small event completion</p><button class="btn btn-primary btn-service" onclick="redirectService('Small Events - $2')">Get Started</button></div>
+                    <div class="service-card"><h3>Big Events</h3><p class="price">$5</p><p class="description">Large event assistance</p><button class="btn btn-primary btn-service" onclick="redirectService('Big Events - $5')">Get Started</button></div>
+                    <div class="service-card"><h3>Map Events</h3><p class="price">$10</p><p class="description">Map-wide event completion</p><button class="btn btn-primary btn-service" onclick="redirectService('Map Events - $10')">Get Started</button></div>
+                    <div class="service-card"><h3>TCG (per level)</h3><p class="price">$3</p><p class="description">Trading Card Game service</p><button class="btn btn-primary btn-service" onclick="redirectService('TCG - $3 per level')">Get Started</button></div>
+                </div>
+
+                <!-- Fishing -->
+                <div class="category-header">
+                    <h2>🎣 Fishing Services</h2>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card"><h3>Weapons / Refinements</h3><p class="price">$5</p><p class="description">Weapon fishing assistance</p><button class="btn btn-primary btn-service" onclick="redirectService('Weapons / Refinements - $5')">Get Started</button></div>
+                    <div class="service-card"><h3>Materials</h3><p class="price">$2</p><p class="description">Material fishing collection</p><button class="btn btn-primary btn-service" onclick="redirectService('Materials - $2')">Get Started</button></div>
+                    <div class="service-card"><h3>Fishing Rods</h3><p class="price">$8</p><p class="description">Fishing rod assistance</p><button class="btn btn-primary btn-service" onclick="redirectService('Fishing Rods - $8')">Get Started</button></div>
+                </div>
+
+                <!-- Quests -->
+                <div class="category-header">
+                    <h2>📜 Quest Services</h2>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card"><h3>Story Quest</h3><p class="price">$1</p><p class="description">Story quest completion</p><button class="btn btn-primary btn-service" onclick="redirectService('Story Quest - $1')">Get Started</button></div>
+                    <div class="service-card"><h3>World Quest (Big)</h3><p class="price">$5</p><p class="description">Large world quest series</p><button class="btn btn-primary btn-service" onclick="redirectService('World Quest (Big) - $5')">Get Started</button></div>
+                    <div class="service-card"><h3>Small World Quests</h3><p class="price">$0.50</p><p class="description">Small world quest completion</p><button class="btn btn-primary btn-service" onclick="redirectService('Small World Quests - $0.50')">Get Started</button></div>
+                    <div class="service-card"><h3>Archon Quests</h3><p class="price">$2</p><p class="description">Archon quest per act</p><button class="btn btn-primary btn-service" onclick="redirectService('Archon Quests - $2 per act')">Get Started</button></div>
+                </div>
+
+                <!-- Primo Farm -->
+                <div class="category-header">
+                    <h2>💰 Primo Farm</h2>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card"><h3>$3 per 10 Pull</h3><p class="price">$3</p><p class="description">Premium pulling service</p><button class="btn btn-primary btn-service" onclick="redirectService('$3 per 10 Pull')">Get Started</button></div>
+                    <div class="service-card"><h3>80 Pulls (Discounted)</h3><p class="price">$20</p><p class="description">80 pull package (save 20%)</p><button class="btn btn-primary btn-service" onclick="redirectService('80 Pulls (Discounted) - $20')">Get Started</button></div>
+                    <div class="service-card"><h3>Maintenance</h3><p class="price">$5</p><p class="description">Monthly maintenance fee</p><button class="btn btn-primary btn-service" onclick="redirectService('Maintenance - $5/month')">Get Started</button></div>
+                </div>
+
+                <div class="note-section">
+                    <div class="note-box">
+                        <h3>📌 Important Note</h3>
+                        <ul>
+                            <li>Some fees are applicable if 25% or more of the task has been completed</li>
+                            <li>Tasks not mentioned here are free or can be discussed with us</li>
+                            <li>Contact us on Discord for custom service requests</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
 
-            <!-- Oculi Collection -->
-            <div class="category-header">
-                <h2>👁️ Oculi Collection</h2>
-            </div>
-            <div class="services-grid">
-                <div class="service-card"><h3>Anemoculus</h3><p class="price">$3</p><p class="description">Anemoculus collection service</p><button class="btn btn-primary btn-service" onclick="redirectService('Anemoculus - $3')">Get Started</button></div>
-                <div class="service-card"><h3>Frostbearing Tree</h3><p class="price">$5</p><p class="description">Frostbearing Tree upgrade</p><button class="btn btn-primary btn-service" onclick="redirectService('Frostbearing Tree - $5')">Get Started</button></div>
-                <div class="service-card"><h3>Geoculus</h3><p class="price">$7</p><p class="description">Geoculus collection</p><button class="btn btn-primary btn-service" onclick="redirectService('Geoculus - $7')">Get Started</button></div>
-                <div class="service-card"><h3>Lumensstone</h3><p class="price">$10</p><p class="description">Lumensstone collection</p><button class="btn btn-primary btn-service" onclick="redirectService('Lumensstone - $10')">Get Started</button></div>
-                <div class="service-card"><h3>Rainjade Oblation</h3><p class="price">$10</p><p class="description">Rainjade Oblation service</p><button class="btn btn-primary btn-service" onclick="redirectService('Rainjade Oblation - $10')">Get Started</button></div>
-                <div class="service-card"><h3>Electroculus</h3><p class="price">$10</p><p class="description">Electroculus collection</p><button class="btn btn-primary btn-service" onclick="redirectService('Electroculus - $10')">Get Started</button></div>
-                <div class="service-card"><h3>Dendroculus</h3><p class="price">$20</p><p class="description">Dendroculus collection</p><button class="btn btn-primary btn-service" onclick="redirectService('Dendroculus - $20')">Get Started</button></div>
-                <div class="service-card"><h3>Hydroculus</h3><p class="price">$15</p><p class="description">Hydroculus collection</p><button class="btn btn-primary btn-service" onclick="redirectService('Hydroculus - $15')">Get Started</button></div>
-                <div class="service-card"><h3>Pyroculus</h3><p class="price">$15</p><p class="description">Pyroculus collection</p><button class="btn btn-primary btn-service" onclick="redirectService('Pyroculus - $15')">Get Started</button></div>
-                <div class="service-card"><h3>Amrita Pool</h3><p class="price">$2</p><p class="description">Amrita Pool assistance</p><button class="btn btn-primary btn-service" onclick="redirectService('Amrita Pool - $2')">Get Started</button></div>
-            </div>
+            <!-- WUTHERING WAVES SERVICES -->
+            <div id="wuthering-pricing" class="game-pricing">
+                <!-- Character Building -->
+                <div class="category-header">
+                    <h2>✨ Character Building</h2>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card"><h3>Ascension Lvl 1>90</h3><p class="price">$7</p><p class="description">Level 1 to 90 complete ascension</p><button class="btn btn-primary btn-service" onclick="redirectService('Ascension Lvl 1>90 - $7')">Get Started</button></div>
+                    <div class="service-card"><h3>Echoes</h3><p class="price">$5</p><p class="description">Echo farming and farming</p><button class="btn btn-primary btn-service" onclick="redirectService('Echoes - $5')">Get Started</button></div>
+                    <div class="service-card"><h3>Talents</h3><p class="price">$5</p><p class="description">Talent leveling service</p><button class="btn btn-primary btn-service" onclick="redirectService('Talents - $5')">Get Started</button></div>
+                </div>
 
-            <!-- Character Ascension -->
-            <div class="category-header">
-                <h2>✨ Character Ascension</h2>
-            </div>
-            <div class="services-grid">
-                <div class="service-card"><h3>Lvl 1 > 80</h3><p class="price">$5</p><p class="description">Level 1 to 80 ascension</p><button class="btn btn-primary btn-service" onclick="redirectService('Lvl 1 > 80 - $5')">Get Started</button></div>
-                <div class="service-card"><h3>Lvl 80 > 90</h3><p class="price">$3</p><p class="description">Level 80 to 90 ascension</p><button class="btn btn-primary btn-service" onclick="redirectService('Lvl 80 > 90 - $3')">Get Started</button></div>
-                <div class="service-card"><h3>Lvl 1 > 90</h3><p class="price">$8</p><p class="description">Complete level ascension</p><button class="btn btn-primary btn-service" onclick="redirectService('Lvl 1 > 90 - $8')">Get Started</button></div>
-                <div class="service-card"><h3>Ores (x50)</h3><p class="price">$1</p><p class="description">50 ore collection</p><button class="btn btn-primary btn-service" onclick="redirectService('Ores (x50) - $1')">Get Started</button></div>
-                <div class="service-card"><h3>Ascension Mats (x30)</h3><p class="price">$1</p><p class="description">30 ascension materials</p><button class="btn btn-primary btn-service" onclick="redirectService('Ascension Mats (x30) - $1')">Get Started</button></div>
-                <div class="service-card"><h3>Flowers (x30)</h3><p class="price">$1</p><p class="description">30 flower collection</p><button class="btn btn-primary btn-service" onclick="redirectService('Flowers (x30) - $1')">Get Started</button></div>
-            </div>
+                <!-- Collectibles -->
+                <div class="category-header">
+                    <h2>💎 Collectibles</h2>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card"><h3>Sonance Caskets Huanglong</h3><p class="price">$7</p><p class="description">Huanglong casket collection</p><button class="btn btn-primary btn-service" onclick="redirectService('Sonance Caskets Huanglong - $7')">Get Started</button></div>
+                    <div class="service-card"><h3>Sonance Caskets Rinsicita</h3><p class="price">$7</p><p class="description">Rinsicita casket collection</p><button class="btn btn-primary btn-service" onclick="redirectService('Sonance Caskets Rinsicita - $7')">Get Started</button></div>
+                    <div class="service-card"><h3>Windchimer</h3><p class="price">$4</p><p class="description">Windchimer collection</p><button class="btn btn-primary btn-service" onclick="redirectService('Windchimer - $4')">Get Started</button></div>
+                </div>
 
-            <!-- Miscellaneous -->
-            <div class="category-header">
-                <h2>🎁 Miscellaneous Services</h2>
-            </div>
-            <div class="services-grid">
-                <div class="service-card"><h3>Teapot</h3><p class="price">$5</p><p class="description">Serenitea Pot setup</p><button class="btn btn-primary btn-service" onclick="redirectService('Teapot - $5')">Get Started</button></div>
-                <div class="service-card"><h3>Small Events</h3><p class="price">$2</p><p class="description">Small event completion</p><button class="btn btn-primary btn-service" onclick="redirectService('Small Events - $2')">Get Started</button></div>
-                <div class="service-card"><h3>Big Events</h3><p class="price">$5</p><p class="description">Large event assistance</p><button class="btn btn-primary btn-service" onclick="redirectService('Big Events - $5')">Get Started</button></div>
-                <div class="service-card"><h3>Map Events</h3><p class="price">$10</p><p class="description">Map-wide event completion</p><button class="btn btn-primary btn-service" onclick="redirectService('Map Events - $10')">Get Started</button></div>
-                <div class="service-card"><h3>TCG (per level)</h3><p class="price">$3</p><p class="description">Trading Card Game service</p><button class="btn btn-primary btn-service" onclick="redirectService('TCG - $3 per level')">Get Started</button></div>
-            </div>
+                <!-- Materials -->
+                <div class="category-header">
+                    <h2>📦 Materials</h2>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card"><h3>x30 Flowers</h3><p class="price">$1</p><p class="description">30 flower collection</p><button class="btn btn-primary btn-service" onclick="redirectService('x30 Flowers - $1')">Get Started</button></div>
+                    <div class="service-card"><h3>x15 Boss Mats</h3><p class="price">$1</p><p class="description">15 boss materials</p><button class="btn btn-primary btn-service" onclick="redirectService('x15 Boss Mats - $1')">Get Started</button></div>
+                    <div class="service-card"><h3>x30 Mob Mats</h3><p class="price">$1</p><p class="description">30 mob materials</p><button class="btn btn-primary btn-service" onclick="redirectService('x30 Mob Mats - $1')">Get Started</button></div>
+                </div>
 
-            <!-- Fishing -->
-            <div class="category-header">
-                <h2>🎣 Fishing Services</h2>
-            </div>
-            <div class="services-grid">
-                <div class="service-card"><h3>Weapons / Refinements</h3><p class="price">$5</p><p class="description">Weapon fishing assistance</p><button class="btn btn-primary btn-service" onclick="redirectService('Weapons / Refinements - $5')">Get Started</button></div>
-                <div class="service-card"><h3>Materials</h3><p class="price">$2</p><p class="description">Material fishing collection</p><button class="btn btn-primary btn-service" onclick="redirectService('Materials - $2')">Get Started</button></div>
-                <div class="service-card"><h3>Fishing Rods</h3><p class="price">$8</p><p class="description">Fishing rod assistance</p><button class="btn btn-primary btn-service" onclick="redirectService('Fishing Rods - $8')">Get Started</button></div>
-            </div>
+                <!-- Exploration -->
+                <div class="category-header">
+                    <h2>🗺️ Exploration</h2>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card"><h3>Huanglong</h3><p class="price">$30</p><p class="description">Huanglong full exploration</p><button class="btn btn-primary btn-service" onclick="redirectService('Huanglong - $30')">Get Started</button></div>
+                    <div class="service-card"><h3>Mt Firmament</h3><p class="price">$8</p><p class="description">Mt Firmament exploration</p><button class="btn btn-primary btn-service" onclick="redirectService('Mt Firmament - $8')">Get Started</button></div>
+                    <div class="service-card"><h3>Black Shores Archipelago</h3><p class="price">$2</p><p class="description">Black Shores Archipelago</p><button class="btn btn-primary btn-service" onclick="redirectService('Black Shores Archipelago - $2')">Get Started</button></div>
+                    <div class="service-card"><h3>Tethys' Deep</h3><p class="price">$3</p><p class="description">Tethys' Deep exploration</p><button class="btn btn-primary btn-service" onclick="redirectService('Tethys\' Deep - $3')">Get Started</button></div>
+                    <div class="service-card"><h3>Rinsicita</h3><p class="price">$20</p><p class="description">Rinsicita full exploration</p><button class="btn btn-primary btn-service" onclick="redirectService('Rinsicita - $20')">Get Started</button></div>
+                    <div class="service-card"><h3>Avinoleum</h3><p class="price">$2</p><p class="description">Avinoleum exploration</p><button class="btn btn-primary btn-service" onclick="redirectService('Avinoleum - $2')">Get Started</button></div>
+                    <div class="service-card"><h3>Beohr Waters</h3><p class="price">$1</p><p class="description">Beohr Waters exploration</p><button class="btn btn-primary btn-service" onclick="redirectService('Beohr Waters - $1')">Get Started</button></div>
+                    <div class="service-card"><h3>Riccoli Island</h3><p class="price">$2</p><p class="description">Riccoli Island exploration</p><button class="btn btn-primary btn-service" onclick="redirectService('Riccoli Island - $2')">Get Started</button></div>
+                    <div class="service-card"><h3>Vault Underground</h3><p class="price">$1</p><p class="description">Vault Underground exploration</p><button class="btn btn-primary btn-service" onclick="redirectService('Vault Underground - $1')">Get Started</button></div>
+                </div>
 
-            <!-- Quests -->
-            <div class="category-header">
-                <h2>📜 Quest Services</h2>
-            </div>
-            <div class="services-grid">
-                <div class="service-card"><h3>Story Quest</h3><p class="price">$1</p><p class="description">Story quest completion</p><button class="btn btn-primary btn-service" onclick="redirectService('Story Quest - $1')">Get Started</button></div>
-                <div class="service-card"><h3>World Quest (Big)</h3><p class="price">$5</p><p class="description">Large world quest series</p><button class="btn btn-primary btn-service" onclick="redirectService('World Quest (Big) - $5')">Get Started</button></div>
-                <div class="service-card"><h3>Small World Quests</h3><p class="price">$0.50</p><p class="description">Small world quest completion</p><button class="btn btn-primary btn-service" onclick="redirectService('Small World Quests - $0.50')">Get Started</button></div>
-                <div class="service-card"><h3>Archon Quests</h3><p class="price">$2</p><p class="description">Archon quest per act</p><button class="btn btn-primary btn-service" onclick="redirectService('Archon Quests - $2 per act')">Get Started</button></div>
-            </div>
+                <!-- Quests -->
+                <div class="category-header">
+                    <h2>📜 Quests</h2>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card"><h3>Big World Quests</h3><p class="price">$3</p><p class="description">Large world quest series</p><button class="btn btn-primary btn-service" onclick="redirectService('Big World Quests - $3')">Get Started</button></div>
+                    <div class="service-card"><h3>Small World Quests</h3><p class="price">$1</p><p class="description">Small world quest completion</p><button class="btn btn-primary btn-service" onclick="redirectService('Small World Quests - $1')">Get Started</button></div>
+                    <div class="service-card"><h3>Story Quests</h3><p class="price">$1</p><p class="description">Story quest completion</p><button class="btn btn-primary btn-service" onclick="redirectService('Story Quests - $1')">Get Started</button></div>
+                    <div class="service-card"><h3>Main Quest</h3><p class="price">$3-$5</p><p class="description">Main quest per act</p><button class="btn btn-primary btn-service" onclick="redirectService('Main Quest - $3-$5 per act')">Get Started</button></div>
+                </div>
 
-            <!-- Primo Farm -->
-            <div class="category-header">
-                <h2>💰 Primo Farm</h2>
-            </div>
-            <div class="services-grid">
-                <div class="service-card"><h3>3$ per 10 Pull</h3><p class="price">$3</p><p class="description">Premium pulling service</p><button class="btn btn-primary btn-service" onclick="redirectService('3$ per 10 Pull')">Get Started</button></div>
-                <div class="service-card"><h3>80 Pulls (Discounted)</h3><p class="price">$20</p><p class="description">80 pull package (save 20%)</p><button class="btn btn-primary btn-service" onclick="redirectService('80 Pulls (Discounted) - $20')">Get Started</button></div>
-                <div class="service-card"><h3>Maintenance</h3><p class="price">$5</p><p class="description">Monthly maintenance fee</p><button class="btn btn-primary btn-service" onclick="redirectService('Maintenance - $5/month')">Get Started</button></div>
-            </div>
+                <!-- Endgame Modes -->
+                <div class="category-header">
+                    <h2>🎮 Endgame Modes</h2>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card"><h3>All Lvl Tactical Simulacra</h3><p class="price">$5</p><p class="description">All level tactical simulacra</p><button class="btn btn-primary btn-service" onclick="redirectService('All Lvl Tactical Simulacra - $5')">Get Started</button></div>
+                    <div class="service-card"><h3>Tower of Adversity</h3><p class="price">$5</p><p class="description">Tower of Adversity service</p><button class="btn btn-primary btn-service" onclick="redirectService('Tower of Adversity - $5')">Get Started</button></div>
+                    <div class="service-card"><h3>Events</h3><p class="price">$2-$5</p><p class="description">Event completion service</p><button class="btn btn-primary btn-service" onclick="redirectService('Events - $2-$5')">Get Started</button></div>
+                </div>
 
-            <!-- Important Note -->
-            <div class="note-section">
-                <div class="note-box">
-                    <h3>📌 Important Note</h3>
-                    <ul>
-                        <li>Some fees are applicable if 25% or more of the task has been completed</li>
-                        <li>Tasks not mentioned here are free or can be discussed with us</li>
-                        <li>Contact us on Discord for custom service requests</li>
-                    </ul>
+                <!-- Maintenance -->
+                <div class="category-header">
+                    <h2>🔧 Maintenance</h2>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card"><h3>Monthly</h3><p class="price">$5</p><p class="description">Monthly maintenance service</p><button class="btn btn-primary btn-service" onclick="redirectService('Maintenance Monthly - $5')">Get Started</button></div>
+                    <div class="service-card"><h3>Weekly</h3><p class="price">$2</p><p class="description">Weekly maintenance service</p><button class="btn btn-primary btn-service" onclick="redirectService('Maintenance Weekly - $2')">Get Started</button></div>
+                </div>
+
+                <!-- Asterite Hunt -->
+                <div class="category-header">
+                    <h2>⭐ Asterite Hunt</h2>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card"><h3>Per 10 Pull</h3><p class="price">$3</p><p class="description">Asterite hunt per 10 pulls</p><button class="btn btn-primary btn-service" onclick="redirectService('Per 10 Pull - $3')">Get Started</button></div>
+                    <div class="service-card"><h3>Per 80 Pull</h3><p class="price">$20</p><p class="description">80 pull asterite package (save 20%)</p><button class="btn btn-primary btn-service" onclick="redirectService('Per 80 Pull - $20')">Get Started</button></div>
+                </div>
+
+                <div class="note-section">
+                    <div class="note-box">
+                        <h3>📌 Important Note</h3>
+                        <ul>
+                            <li>Some fees are applicable if 25% or more of the task has been completed</li>
+                            <li>Tasks not mentioned here are free or can be discussed with us</li>
+                            <li>Contact us on Discord for custom service requests</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1505,7 +1543,7 @@
                                 <span class="label-icon">🎮</span>
                                 Service Used
                             </label>
-                            <input type="text" id="service" name="service" placeholder="e.g., Fontain Exploration" required>
+                            <input type="text" id="service" name="service" placeholder="e.g., Fontaine Exploration" required>
                         </div>
 
                         <div class="form-group">
@@ -1570,87 +1608,38 @@
                 </div>
             </div>
         </section>
-    </section>
 
-    <!-- STATUS SECTION -->
-    <section id="status" class="section">
-        <div class="status-header">
-            <h1>Your Service Status</h1>
-            <p>Track your ongoing and completed services</p>
-        </div>
-
-        <div class="status-container">
-            <div class="lookup-box">
-                <h2>Check Your Order</h2>
-                <p>Enter your order number or contact Discord for real-time updates</p>
-                <form id="statusForm" class="status-form">
-                    <div class="form-group">
-                        <label for="orderNumber">Order Number</label>
-                        <input type="text" id="orderNumber" name="orderNumber" placeholder="e.g., AVL-2026-001">
+        <section class="discord-bot-section">
+            <h2>🤖 View Reviews on Discord</h2>
+            <div class="bot-card">
+                <div class="bot-icon">💬</div>
+                <h3>Kumori Review Bot</h3>
+                <p>Join our Discord server to see all customer reviews and connect with the community! Our Discord bot makes it easy to check what other users think about our services.</p>
+                
+                <div class="bot-commands">
+                    <h4>Available Commands</h4>
+                    <div class="command">
+                        <div class="command-name">/reviews</div>
+                        <div class="command-description">Shows all reviews from customers</div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Search Order</button>
-                </form>
-                <div id="searchResult" class="search-result">
-                    <p id="resultMessage"></p>
+                    <div class="command">
+                        <div class="command-name">/reviews latest</div>
+                        <div class="command-description">Shows the latest reviews</div>
+                    </div>
+                    <div class="command">
+                        <div class="command-name">/reviews [service-name]</div>
+                        <div class="command-description">Shows reviews for a specific service (e.g. /reviews Fontaine)</div>
+                    </div>
+                    <div class="command">
+                        <div class="command-name">/reviews rating:5</div>
+                        <div class="command-description">Shows only 5-star reviews</div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="orders-box">
-                <h2>Sample Order Format</h2>
-                <p>Your order number looks like this:</p>
-                <div class="order-example">AVL-2026-001</div>
-                <p>You'll receive this number when you complete your purchase on Ko-fi or Discord</p>
-            </div>
-        </div>
-
-        <section class="live-status-section">
-            <h2>Quick Status Updates</h2>
-            <p>For real-time status updates and live communication, contact us on Discord</p>
-            <div class="status-cards">
-                <div class="status-card">
-                    <div class="status-icon">⏳</div>
-                    <h3>In Progress</h3>
-                    <p>Your order is being worked on</p>
-                </div>
-                <div class="status-card">
-                    <div class="status-icon">✅</div>
-                    <h3>Completed</h3>
-                    <p>Your order is finished and ready</p>
-                </div>
-                <div class="status-card">
-                    <div class="status-icon">⏰</div>
-                    <h3>Pending</h3>
-                    <p>Your order is queued and will start soon</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="contact-status-section">
-            <h2>Need Help Tracking Your Order?</h2>
-            <p>For immediate assistance and live status updates, reach out on Discord</p>
-            <div class="contact-buttons">
-                <a href="https://discord.com/users/not_shariff" target="_blank" class="btn btn-primary">📱 Contact on Discord</a>
-                <a href="http://ko-fi.com/avalon33778" target="_blank" class="btn btn-secondary">☕ Message on Ko-fi</a>
-            </div>
-        </section>
-
-        <section class="faq-section">
-            <h2>Frequently Asked Questions</h2>
-            <div class="faq-item">
-                <h3 onclick="toggleFAQ(this)">How long does a typical order take?</h3>
-                <p>Most orders are completed within 24-48 hours. Complex services may take longer. You'll get updates on Discord!</p>
-            </div>
-            <div class="faq-item">
-                <h3 onclick="toggleFAQ(this)">Can I track my order in real-time?</h3>
-                <p>Yes! Join our Discord server to chat with us and get live updates on your order status anytime.</p>
-            </div>
-            <div class="faq-item">
-                <h3 onclick="toggleFAQ(this)">What if something goes wrong with my order?</h3>
-                <p>Contact us immediately on Discord. We'll fix any issues and ensure you're completely satisfied!</p>
-            </div>
-            <div class="faq-item">
-                <h3 onclick="toggleFAQ(this)">How do I know when my order is complete?</h3>
-                <p>We'll notify you on Discord with a completion message. You can also check this page with your order number.</p>
+                <a href="https://discord.com/users/not_shariff" target="_blank" class="discord-button">
+                    <span>💬</span>
+                    Join Discord Server
+                </a>
             </div>
         </section>
     </section>
@@ -1665,10 +1654,10 @@
         <section class="terms-section">
             <div class="terms-content">
                 <h2>1. Agreement to Terms</h2>
-                <p>By using Avalon Pilot Service, you agree to comply with these Terms of Service. If you do not agree with any part of these terms, you may not use our services.</p>
+                <p>By using Kumori Pilot Service, you agree to comply with these Terms of Service. If you do not agree with any part of these terms, you may not use our services.</p>
 
                 <h2>2. Service Description</h2>
-                <p>Avalon Pilot Service provides account assistance services for Genshin Impact. Our pilots will help you complete various in-game tasks including exploration, character ascension, quest completion, and more.</p>
+                <p>Kumori Pilot Service provides account assistance services for Genshin Impact and Wuthering Waves. Our pilots will help you complete various in-game tasks including exploration, character building, quest completion, and more.</p>
 
                 <h2>3. Account Access</h2>
                 <p>When you purchase our services, you will be required to provide your account credentials. You understand that:</p>
@@ -1711,15 +1700,15 @@
                     <li>Use our services for illegal purposes</li>
                     <li>Attempt to reverse-engineer or disrupt our services</li>
                     <li>Share account access with unauthorized parties</li>
-                    <li>Violate Genshin Impact's Terms of Service</li>
+                    <li>Violate any game's Terms of Service</li>
                     <li>Harass or abuse our staff</li>
                 </ul>
 
                 <h2>8. Account Safety Disclaimer</h2>
-                <p>While we take every precaution to protect your account, we cannot guarantee that your account will not be flagged or banned by miHoYo. Account access by third parties carries inherent risks. By using our service, you acknowledge this risk.</p>
+                <p>While we take every precaution to protect your account, we cannot guarantee that your account will not be flagged or banned by the game publisher. Account access by third parties carries inherent risks. By using our service, you acknowledge this risk.</p>
 
                 <h2>9. Limitation of Liability</h2>
-                <p>Avalon Pilot Service is provided "as is" without warranties. We are not liable for:</p>
+                <p>Kumori Pilot Service is provided "as is" without warranties. We are not liable for:</p>
                 <ul>
                     <li>Account bans or suspensions</li>
                     <li>Loss of game progress or items</li>
@@ -1736,7 +1725,7 @@
 
                 <hr>
 
-                <p class="terms-footer">By using Avalon Pilot Service, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service.</p>
+                <p class="terms-footer">By using Kumori Pilot Service, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service.</p>
             </div>
         </section>
     </section>
@@ -1750,7 +1739,6 @@
                     <li><a onclick="showSection('home')">Home</a></li>
                     <li><a onclick="showSection('pricing')">Services</a></li>
                     <li><a onclick="showSection('reviews')">Reviews</a></li>
-                    <li><a onclick="showSection('status')">Order Status</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -1777,20 +1765,31 @@
         // SECTION NAVIGATION
         // ==================== 
         function showSection(sectionId) {
-            // Hide all sections
             document.querySelectorAll('.section').forEach(section => {
                 section.classList.remove('active');
             });
             
-            // Show selected section
             document.getElementById(sectionId).classList.add('active');
-            
-            // Scroll to top
             window.scrollTo(0, 0);
             
-            // Close mobile menu
             document.querySelector('.hamburger').classList.remove('active');
             document.querySelector('.nav-links').classList.remove('active');
+        }
+
+        // ==================== 
+        // GAME TOGGLE
+        // ==================== 
+        function switchGame(game) {
+            document.querySelectorAll('.game-pricing').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+            
+            if (game === 'genshin') {
+                document.getElementById('genshin-pricing').classList.add('active');
+                document.querySelectorAll('.toggle-btn')[0].classList.add('active');
+            } else if (game === 'wuthering') {
+                document.getElementById('wuthering-pricing').classList.add('active');
+                document.querySelectorAll('.toggle-btn')[1].classList.add('active');
+            }
         }
 
         // ==================== 
@@ -1800,14 +1799,6 @@
             document.querySelector('.hamburger').classList.toggle('active');
             document.querySelector('.nav-links').classList.toggle('active');
         }
-
-        // Close menu when a link is clicked
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.querySelector('.hamburger').classList.remove('active');
-                document.querySelector('.nav-links').classList.remove('active');
-            });
-        });
 
         // ==================== 
         // SCROLL TO FEATURES
@@ -1884,39 +1875,6 @@
                 reviewForm.reset();
                 document.getElementById('name').focus();
             }
-        }
-
-        // ==================== 
-        // STATUS FORM SUBMISSION
-        // ==================== 
-        const statusForm = document.getElementById('statusForm');
-        if (statusForm) {
-            statusForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const orderNumber = document.getElementById('orderNumber').value;
-                const resultDiv = document.getElementById('searchResult');
-                const resultMessage = document.getElementById('resultMessage');
-                
-                if (orderNumber.match(/^AVL-\d{4}-\d{3}$/)) {
-                    resultMessage.innerHTML = `✅ Order <strong>${orderNumber}</strong> found!<br>Status: In Progress<br><br>For real-time updates, please contact us on Discord at <strong>not_shariff</strong>`;
-                    resultDiv.style.display = 'block';
-                } else {
-                    resultMessage.innerHTML = `⚠️ Order number not found.<br>Please check your order number format: AVL-YYYY-###<br><br>Need help? Contact us on Discord!`;
-                    resultDiv.style.display = 'block';
-                    resultDiv.style.background = 'rgba(239, 68, 68, 0.1)';
-                    resultDiv.style.borderColor = '#ef4444';
-                    resultDiv.style.color = '#fca5a5';
-                }
-            });
-        }
-
-        // ==================== 
-        // FAQ ACCORDION
-        // ==================== 
-        function toggleFAQ(element) {
-            const faqItem = element.parentElement;
-            faqItem.classList.toggle('active');
         }
 
         console.log('Kumori Pilot Service - Website loaded successfully! 🎮⚓');
